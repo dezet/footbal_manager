@@ -1,1 +1,4 @@
-#jeszcze nie wiem co tu wpisać ^_^
+databaseChangeLog:
+- changeset:
+      id: 1
+      author: mkoszalka

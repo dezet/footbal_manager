@@ -10,6 +10,10 @@ buildscript {
 	}
 }
 
+plugins {
+    id 'org.liquibase.gradle' version '1.2.4'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -26,7 +30,8 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.liquibase:liquibase-core')
-	compile('org.springframework.boot:spring-boot-starter-security')
+    classpath "org.liquibase:liquibase-gradle-plugin:1.1.1"
+    compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
