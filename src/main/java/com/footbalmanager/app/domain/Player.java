@@ -3,23 +3,28 @@ package com.footbalmanager.app.domain;
 
 import javax.persistence.*;
 
+import static org.springframework.util.Assert.notNull;
+
 @Entity
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "player_id", nullable = false)
+    @Column(nullable = false)
     private Long id;
-
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstname;
-
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastname;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    public Player() {
+    Player() {
     }
 
     public Player(String firstname, String lastname) {
+        notNull(firstname, "Please provide firstname");
+        notNull(lastname, "Please provide lastname");
         this.firstname = firstname;
         this.lastname = lastname;
     }
@@ -46,5 +51,13 @@ public class Player {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

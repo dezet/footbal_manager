@@ -4,4 +4,6 @@ import com.footbalmanager.app.domain.Player;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PlayerRepository extends CrudRepository<Player, Long> {
+
+
 }
