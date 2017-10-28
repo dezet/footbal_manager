@@ -24,7 +24,7 @@ public class PlayerRepositoryTests extends BaseRepositoryTest {
     }
 
     @Test
-    public void save_thenCorrect() {
+    public void findAll_thenCorrect() {
         Player p = new Player("Dominik", "Dziąg");
         em.persist(p);
         assertThat(playerRepository.findAll().spliterator().getExactSizeIfKnown() == 1L);

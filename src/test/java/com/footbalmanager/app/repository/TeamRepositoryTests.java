@@ -25,7 +25,7 @@ public class TeamRepositoryTests extends BaseRepositoryTest {
     }
 
     @Test
-    public void save_thenCorrect() {
+    public void findAll_thenCorrect() {
         League l = new League("leagueA");
         Team t = new Team("druzynaA", l);
         em.persist(t);

@@ -27,7 +27,7 @@ public class MatchRepositoryTests extends BaseRepositoryTest {
     }
 
     @Test
-    public void save_thenCorrect() {
+    public void findAll_thenCorrect() {
         League l = new League("LeagueA");
         Team t1 = new Team("team1", l);
         Team t2 = new Team("team2", l);

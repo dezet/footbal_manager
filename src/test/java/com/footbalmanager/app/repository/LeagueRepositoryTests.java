@@ -24,7 +24,7 @@ public class LeagueRepositoryTests extends BaseRepositoryTest {
     }
 
     @Test
-    public void save_thenCorrect() {
+    public void findAll_thenCorrect() {
         League l = new League("LigaA");
         em.persist(l);
         assertThat(leagueRepository.findAll().spliterator().getExactSizeIfKnown()).isEqualTo(1L);
