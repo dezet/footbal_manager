@@ -29,6 +29,7 @@ public class League {
         notNull(name, "Please provide name");
         notNull(season, "Please provide season");
         this.name = name;
+        this.season = season;
     }
 
     public Season getSeason() {
