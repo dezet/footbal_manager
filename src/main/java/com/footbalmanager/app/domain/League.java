@@ -1,7 +1,6 @@
 package com.footbalmanager.app.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,13 +18,25 @@ public class League {
     private Collection<Team> teams = new ArrayList<>();
     @OneToMany(mappedBy = "league")
     private Collection<Match> matches = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "away_team_id", nullable = false)
+    private Season season;
 
     League() {
     }
 
-    public League(String name) {
+    public League(String name, Season season) {
         notNull(name, "Please provide name");
+        notNull(season, "Please provide season");
         this.name = name;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
     public Long getId() {
