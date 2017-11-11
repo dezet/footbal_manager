@@ -6,6 +6,13 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+const vueConfig = require('vue-config')
+const configs = {
+  API: 'http://localhost:8124/'
+}
+
+Vue.use(vueConfig, configs)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
