@@ -61,7 +61,9 @@ public class Match {
         this.awayScore = awayScore;
         this.played = played;
         this.league = league;
+
     }
+
 
     public Long getId() {
         return id;
