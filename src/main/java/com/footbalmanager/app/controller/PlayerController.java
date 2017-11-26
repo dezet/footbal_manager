@@ -53,13 +53,12 @@ public class PlayerController extends BaseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @DeleteMapping("/players/{playerId}")
     public ResponseEntity<?> deletePlayer(@PathVariable Long playerId) {
-        //TODO: obsluga wyjątków
-        playerService.delete(playerId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+		//TODO: obsluga wyjątków
+		playerService.delete(playerId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 	@PostMapping("/sign-up")
 	public void signUp(@RequestBody Player player) {

@@ -4,8 +4,8 @@ import Main from '@/components/Main'
 import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
-
 import AddPlayers from '@/components/AddPlayers'
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,17 +21,17 @@ export default new Router({
       component: Players
     },
     {
+      path: '/newplayer',
+      name: 'new players',
+      component: AddPlayers
+    },
+    {
       path: '/login',
       component: Login
     },
     {
       path: '/signup',
       component: Signup
-    },
-    {
-      path: '/newplayer',
-      name: 'new players',
-      component: AddPlayers
     }
   ]
 })
