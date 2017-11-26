@@ -1,12 +1,17 @@
 package com.footbalmanager.app.domain;
 
 
+import java.util.Collection;
+
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import static org.springframework.util.Assert.notNull;
 
 @Entity
-public class Player {
+public class Player implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -15,6 +20,10 @@ public class Player {
     private String firstname;
     @Column(name = "last_name", nullable = false)
     private String lastname;
+	@Column(nullable = false)
+	private String username;
+    @Column(nullable = false)
+    private String password;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_id")
     private Team team;
@@ -60,4 +69,45 @@ public class Player {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
