@@ -19,6 +19,10 @@ public class Season {
     private Season() {
     }
 
+    public Season(String name, String year) {
+        this.name = name;
+        this.year = year;
+    }
 
     public Long getId() {
         return id;
