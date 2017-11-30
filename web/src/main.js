@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+//import bootstrap from 'bootstrap'
 
 Vue.config.productionTip = false
 
@@ -12,6 +13,7 @@ const configs = {
 }
 
 Vue.use(vueConfig, configs)
+//Vue.use(bootstrap)
 
 /* eslint-disable no-new */
 new Vue({
