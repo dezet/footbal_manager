@@ -28,6 +28,7 @@ export default {
       },
     (err) => {
       console.log(err)
+      return this.user.authenticated
     })
   },
 
