@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  margin: -70px auto;
+  align-items: center;
+  height: 100vh;
+}
+
+.mainWrapper {
+  margin: 0 auto;
+}
