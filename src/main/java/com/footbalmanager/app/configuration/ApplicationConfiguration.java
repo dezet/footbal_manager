@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "com.footbalmanager.app.repository")
-@ComponentScan(basePackages = "com.footbalmanager.app.controller")
+@ComponentScan(basePackages = {"com.footbalmanager.app.controller", "com.footbalmanager.app.services"})
 @EntityScan(basePackages = "com.footbalmanager.app.domain")
 @EnableTransactionManagement
 public class ApplicationConfiguration {
