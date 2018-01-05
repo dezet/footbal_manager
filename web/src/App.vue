@@ -4,6 +4,7 @@
       <main-menu/>
     </header>
 
+
     <div class="main">
       <router-view/>
     </div>
@@ -22,6 +23,7 @@
 </script>
 
 <style>
+
   .main {
     flex: 1;
     width: 100%;
@@ -29,4 +31,6 @@
     min-height: 360px;
     display: flex;
   }
+#app {
+}
 </style>
