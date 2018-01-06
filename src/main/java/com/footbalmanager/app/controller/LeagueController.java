@@ -1,5 +1,6 @@
 package com.footbalmanager.app.controller;
 
+import com.footbalmanager.app.abstraction.BaseController;
 import com.footbalmanager.app.dto.league.PatchLeagueRequestDto;
 import com.footbalmanager.app.dto.league.PostLeagueRequestDto;
 import com.footbalmanager.app.services.LeagueService;
@@ -9,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
-public class LeagueController {
+public class LeagueController  extends BaseController {
     @Autowired
     private LeagueService leagueService;
 
@@ -26,7 +26,7 @@ public class LeagueController {
     }
 
     @PatchMapping("/leagues/{leagueId}")
-    public ResponseEntity<?> patchLeague(@PathVariable Long leagueId, @RequestBody PatchLeagueRequestDto dto) {
+    public ResponseEntity<?> updateLeague(@PathVariable Long leagueId, @RequestBody PatchLeagueRequestDto dto) {
         leagueService.update(leagueId, dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class LeagueController {
     }
 
     @PostMapping("/leagues")
-    public ResponseEntity<?> postLeague(@RequestBody PostLeagueRequestDto dto) {
+    public ResponseEntity<?> saveLeague(@RequestBody PostLeagueRequestDto dto) {
         leagueService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package com.footbalmanager.app.controller;
 
+import com.footbalmanager.app.abstraction.BaseController;
 import com.footbalmanager.app.dto.match.PatchMatchRequestDto;
 import com.footbalmanager.app.dto.match.PostMatchRequestDto;
 import com.footbalmanager.app.services.MatchService;
@@ -9,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
-public class MatchController {
+public class MatchController extends BaseController {
     @Autowired
     private MatchService matchService;
 
@@ -25,14 +25,14 @@ public class MatchController {
     }
 
     @PostMapping("/matches")
-    public ResponseEntity<?> postMatch(@RequestBody PostMatchRequestDto dto) {
+    public ResponseEntity<?> saveMatch(@RequestBody PostMatchRequestDto dto) {
         //TODO: obsluga wyjątków
         matchService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/matches/{matchId}")
-    public ResponseEntity<?> patchTeam(@PathVariable Long matchId, @RequestBody PatchMatchRequestDto dto) {
+    public ResponseEntity<?> updateTeam(@PathVariable Long matchId, @RequestBody PatchMatchRequestDto dto) {
         //TODO: obsluga wyjątków
         matchService.update(matchId, dto);
         return new ResponseEntity<>(HttpStatus.OK);

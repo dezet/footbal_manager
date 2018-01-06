@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LeagueControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
 
     @MockBean
     private LeagueService leagueService;
@@ -39,20 +39,20 @@ public class LeagueControllerTest {
     private ObjectMapper objectMapper;
 
 
-    private EntityTestManager etm;
+    private EntityTestManager entityTestManager;
 
     @Before
     public void setUp() {
-        this.etm = new EntityTestManager();
+        this.entityTestManager = new EntityTestManager();
     }
 
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void getLeagues_thenResponseIsOk() throws Exception {
-        List<League> leagues = Arrays.asList(etm.getLeague(), etm.getLeague());
+        List<League> leagues = Arrays.asList(entityTestManager.getLeague(), entityTestManager.getLeague());
         given(leagueService.findAll()).willReturn(leagues);
         this
-                .mvc
+                .mockMvc
                 .perform(get("/leagues").accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(leagues)));
@@ -63,11 +63,11 @@ public class LeagueControllerTest {
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void getLeague_thenResponseIsOk() throws Exception {
         Long leagueId = 1L;
-        League l = etm.getLeague();
+        League l = entityTestManager.getLeague();
         l.setId(leagueId);
         given(leagueService.findOne(leagueId)).willReturn(l);
         this
-                .mvc
+                .mockMvc
                 .perform(get("/leagues/" + leagueId).accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(l)));

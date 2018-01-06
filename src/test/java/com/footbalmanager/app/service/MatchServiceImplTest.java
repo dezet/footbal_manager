@@ -33,35 +33,35 @@ public class MatchServiceImplTest {
     @Autowired
     private EntityTestManager entityTestManager;
 
-    private Match m;
+    private Match match;
 
     @Before
     public void setUp() {
         Team home = entityTestManager.getTeam("home");
         Team away = entityTestManager.getTeam("away");
-        m = entityTestManager.getMatch(home, away);
+        match = entityTestManager.getMatch(home, away);
     }
 
     @Test
     public void whenSave_thenCorrect() {
         //given
-        given(matchRepository.save(m))
-                .willReturn(m);
+        given(matchRepository.save(match))
+                .willReturn(match);
 
         //when
-        matchService.save(m);
+        matchService.save(match);
 
         //then
         then(matchRepository)
                 .should(times(1))
-                .save(m);
+                .save(match);
     }
 
     @Test
     public void whenFindOne_thenCorrect() {
         //given
         given(matchRepository.findOne(10L))
-                .willReturn(m);
+                .willReturn(match);
         //when
         matchService.findOne(10L);
         //then
@@ -74,7 +74,7 @@ public class MatchServiceImplTest {
     public void whenFindAll_thenCorrect() {
         //given
         given(matchRepository.findAll())
-                .willReturn(Arrays.asList(m));
+                .willReturn(Arrays.asList(match));
         //when
         matchService.findAll();
         //then
@@ -100,11 +100,11 @@ public class MatchServiceImplTest {
         //given
 
         //when
-        matchService.delete(m);
+        matchService.delete(match);
         //then
         then(matchRepository)
                 .should(times(1))
-                .delete(m);
+                .delete(match);
     }
 }
 

@@ -28,33 +28,33 @@ public class PlayerServiceImplTest {
     @Autowired
     private PlayerService playerService;
 
-    private Player p;
+    private Player player;
 
     @Before
     public void setUp() {
-        p = new Player("Dominik", "Domdomin");
+        player = new Player("Dominik", "Domdomin");
     }
 
     @Test
     public void whenSave_thenCorrect() {
         //given
-        given(playerRepository.save(p))
-                .willReturn(p);
+        given(playerRepository.save(player))
+                .willReturn(player);
 
         //when
-        playerService.save(p);
+        playerService.save(player);
 
         //then
         then(playerRepository)
                 .should(times(1))
-                .save(p);
+                .save(player);
     }
 
     @Test
     public void whenFindOne_thenCorrect() {
         //given
         given(playerRepository.findOne(10L))
-                .willReturn(p);
+                .willReturn(player);
         //when
         playerService.findOne(10L);
         //then
@@ -67,7 +67,7 @@ public class PlayerServiceImplTest {
     public void whenFindAll_thenCorrect() {
         //given
         given(playerRepository.findAll())
-                .willReturn(Arrays.asList(p));
+                .willReturn(Arrays.asList(player));
         //when
         playerService.findAll();
         //then
@@ -93,11 +93,11 @@ public class PlayerServiceImplTest {
         //given
 
         //when
-        playerService.delete(p);
+        playerService.delete(player);
         //then
         then(playerRepository)
                 .should(times(1))
-                .delete(p);
+                .delete(player);
     }
 }
 

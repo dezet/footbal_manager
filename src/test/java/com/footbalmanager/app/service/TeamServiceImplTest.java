@@ -31,30 +31,30 @@ public class TeamServiceImplTest {
     @Autowired
     private TeamService teamService;
 
-    private Team t;
+    private Team team;
 
     @Before
     public void setUp() {
-        Season s = new Season("s1", "2017");
-        League l = new League("name", s);
-        t = new Team("Name1", l);
+        Season season = new Season("s1", "2017");
+        League league = new League("name", season);
+        team = new Team("Name1", league);
     }
 
     @Test
     public void whenSave_thenCorrect() {
         //given
         BDDMockito
-                .given(teamRepository.save(t))
-                .willReturn(t);
+                .given(teamRepository.save(team))
+                .willReturn(team);
 
         //when
-        teamService.save(t);
+        teamService.save(team);
 
         //then
         BDDMockito
                 .then(teamRepository)
                 .should(BDDMockito.times(1))
-                .save(t);
+                .save(team);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class TeamServiceImplTest {
         //given
         BDDMockito
                 .given(teamRepository.findOne(10L))
-                .willReturn(t);
+                .willReturn(team);
         //when
         teamService.findOne(10L);
         //then
@@ -78,7 +78,7 @@ public class TeamServiceImplTest {
         //given
         BDDMockito
                 .given(teamRepository.findAll())
-                .willReturn(Arrays.asList(t));
+                .willReturn(Arrays.asList(team));
         //when
         teamService.findAll();
         //then
@@ -105,12 +105,12 @@ public class TeamServiceImplTest {
         //given
 
         //when
-        teamService.delete(t);
+        teamService.delete(team);
         //then
         BDDMockito
                 .then(teamRepository)
                 .should(BDDMockito.times(1))
-                .delete(t);
+                .delete(team);
     }
 
 }

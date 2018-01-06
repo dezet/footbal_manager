@@ -33,25 +33,25 @@ public class PlayerControllerTest {
     private PlayerService playerService;
 
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private EntityTestManager etm;
+    private EntityTestManager entityTestManager;
 
     @Before
     public void setUp() {
-        this.etm = new EntityTestManager();
+        this.entityTestManager = new EntityTestManager();
     }
 
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void getPlayers_thenResponseIsOk() throws Exception {
-        List<Player> players = Arrays.asList(etm.getPlayer("Dominik", "D"), etm.getPlayer("D", "Dominik"));
+        List<Player> players = Arrays.asList(entityTestManager.getPlayer("Dominik", "D"), entityTestManager.getPlayer("D", "Dominik"));
         given(playerService.findAll()).willReturn(players);
         this
-                .mvc
+                .mockMvc
                 .perform(get("/players"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(players)));
@@ -62,11 +62,11 @@ public class PlayerControllerTest {
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void getPlayer_thenResponseIsOk() throws Exception {
         final long playerId = 1L;
-        Player p = etm.getPlayer("Dominik", "D");
+        Player p = entityTestManager.getPlayer("Dominik", "D");
         p.setId(playerId);
         given(playerService.findOne(playerId)).willReturn(p);
         this
-                .mvc
+                .mockMvc
                 .perform(get("/players/" + playerId))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(p)));

@@ -28,27 +28,27 @@ public class SeasonServiceImplTest {
     @Autowired
     private SeasonService seasonService;
 
-    private Season s;
+    private Season season;
 
     @Before
     public void setUp() {
-        s = new Season("Dominik", "2017");
+        season = new Season("Dominik", "2017");
     }
 
     @Test
     public void whenSave_thenCorrect() {
-        given(seasonRepository.save(s))
-                .willReturn(s);
-        seasonService.save(s);
+        given(seasonRepository.save(season))
+                .willReturn(season);
+        seasonService.save(season);
         then(seasonRepository)
                 .should(times(1))
-                .save(s);
+                .save(season);
     }
 
     @Test
     public void whenFindOne_thenCorrect() {
         given(seasonRepository.findOne(10L))
-                .willReturn(s);
+                .willReturn(season);
         seasonService.findOne(10L);
         then(seasonRepository)
                 .should(times(1))
@@ -58,7 +58,7 @@ public class SeasonServiceImplTest {
     @Test
     public void whenFindAll_thenCorrect() {
         given(seasonRepository.findAll())
-                .willReturn(Arrays.asList(s));
+                .willReturn(Arrays.asList(season));
         seasonService.findAll();
         then(seasonRepository)
                 .should(times(1))
@@ -75,10 +75,10 @@ public class SeasonServiceImplTest {
 
     @Test
     public void whenDeleteByEntity_thenCorrect() {
-        seasonService.delete(s);
+        seasonService.delete(season);
         then(seasonRepository)
                 .should(times(1))
-                .delete(s);
+                .delete(season);
     }
 }
 

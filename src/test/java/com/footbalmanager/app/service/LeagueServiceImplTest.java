@@ -27,29 +27,29 @@ public class LeagueServiceImplTest {
     @Autowired
     private LeagueService leagueService;
 
-    private Season s;
-    private League l;
+    private Season season;
+    private League league;
 
     @Before
     public void setUp() {
-        s = new Season("sezon1", "2017");
-        l = new League("name", s);
+        season = new Season("sezon1", "2017");
+        league = new League("name", season);
     }
 
     @Test
     public void whenSave_thenCorrect() {
-        given(leagueRepository.save(l))
-                .willReturn(l);
-        leagueService.save(l);
+        given(leagueRepository.save(league))
+                .willReturn(league);
+        leagueService.save(league);
         then(leagueRepository)
                 .should(times(1))
-                .save(l);
+                .save(league);
     }
 
     @Test
     public void whenFindOne_thenCorrect() {
         given(leagueRepository.findOne(10L))
-                .willReturn(l);
+                .willReturn(league);
         leagueService.findOne(10L);
         then(leagueRepository)
                 .should(times(1))
@@ -59,7 +59,7 @@ public class LeagueServiceImplTest {
     @Test
     public void whenFindAll_thenCorrect() {
         given(leagueRepository.findAll())
-                .willReturn(Arrays.asList(l));
+                .willReturn(Arrays.asList(league));
         leagueService.findAll();
         then(leagueRepository)
                 .should(times(1))
@@ -76,10 +76,10 @@ public class LeagueServiceImplTest {
 
     @Test
     public void whenDeleteByEntity_thenCorrect() {
-        leagueService.delete(l);
+        leagueService.delete(league);
         then(leagueRepository)
                 .should(times(1))
-                .delete(l);
+                .delete(league);
     }
 }
 

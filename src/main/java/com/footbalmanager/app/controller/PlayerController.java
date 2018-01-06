@@ -1,5 +1,6 @@
 package com.footbalmanager.app.controller;
 
+import com.footbalmanager.app.abstraction.BaseController;
 import com.footbalmanager.app.dto.player.PatchPlayerRequestDto;
 import com.footbalmanager.app.dto.player.PostPlayerRequestDto;
 import com.footbalmanager.app.services.PlayerService;
@@ -9,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
-public class PlayerController {
+public class PlayerController extends BaseController {
     @Autowired
     private PlayerService playerService;
 
@@ -25,14 +25,14 @@ public class PlayerController {
     }
 
     @PostMapping("/players")
-    public ResponseEntity<?> postPlayer(@RequestBody PostPlayerRequestDto dto) {
+    public ResponseEntity<?> savePlayer(@RequestBody PostPlayerRequestDto dto) {
         //TODO: obsluga wyjątków
         playerService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/players/{playerId}")
-    public ResponseEntity<?> patchPlayer(@PathVariable Long playerId, @RequestBody PatchPlayerRequestDto dto) {
+    public ResponseEntity<?> updatePlayer(@PathVariable Long playerId, @RequestBody PatchPlayerRequestDto dto) {
         //TODO: obsluga wyjątków
         playerService.update(playerId, dto);
         return new ResponseEntity<>(HttpStatus.OK);

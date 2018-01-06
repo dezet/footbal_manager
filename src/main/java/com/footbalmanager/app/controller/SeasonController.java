@@ -1,5 +1,6 @@
 package com.footbalmanager.app.controller;
 
+import com.footbalmanager.app.abstraction.BaseController;
 import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
 import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
 import com.footbalmanager.app.services.SeasonService;
@@ -7,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
-@CrossOrigin("http://localhost:8080")
-public class SeasonController {
+public class SeasonController extends BaseController {
     @Autowired
     private SeasonService seasonService;
 
@@ -25,14 +24,14 @@ public class SeasonController {
     }
 
     @PostMapping("/seasons")
-    public ResponseEntity<?> postMatch(@RequestBody PostSeasonRequestDto dto) {
+    public ResponseEntity<?> saveMatch(@RequestBody PostSeasonRequestDto dto) {
         //TODO: obsluga wyjątków
         seasonService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/seasons/{seasonId}")
-    public ResponseEntity<?> patchTeam(@PathVariable Long seasonId, @RequestBody PatchSeasonRequestDto dto) {
+    public ResponseEntity<?> updateTeam(@PathVariable Long seasonId, @RequestBody PatchSeasonRequestDto dto) {
         //TODO: obsluga wyjątków
         seasonService.update(seasonId, dto);
         return new ResponseEntity<>(HttpStatus.OK);
