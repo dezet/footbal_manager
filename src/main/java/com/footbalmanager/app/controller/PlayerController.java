@@ -5,9 +5,17 @@ import com.footbalmanager.app.dto.player.PatchPlayerRequestDto;
 import com.footbalmanager.app.dto.player.PostPlayerRequestDto;
 import com.footbalmanager.app.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 
 @RestController
 public class PlayerController extends BaseController {
@@ -37,6 +45,7 @@ public class PlayerController extends BaseController {
         playerService.update(playerId, dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @DeleteMapping("/players/{playerId}")
     public ResponseEntity<?> deletePlayer(@PathVariable Long playerId) {
