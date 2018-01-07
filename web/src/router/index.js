@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Players from '@/components/Players'
 
+import AddPlayers from '@/components/AddPlayers'
 Vue.use(Router)
 
 export default new Router({
@@ -16,6 +17,11 @@ export default new Router({
       path: '/players',
       name: 'Players',
       component: Players
+    },
+    {
+      path: '/newplayer',
+      name: 'new players',
+      component: AddPlayers
     }
   ]
 })

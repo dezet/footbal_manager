@@ -4,7 +4,8 @@
       <main-menu/>
     </header>
 
-    <div class="wrapper">
+
+    <div class="main">
       <router-view/>
     </div>
   </div>
@@ -22,6 +23,14 @@
 </script>
 
 <style>
+
+  .main {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    display: flex;
+  }
 #app {
 }
 </style>
