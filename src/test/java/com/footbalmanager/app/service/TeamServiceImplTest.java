@@ -1,5 +1,16 @@
 package com.footbalmanager.app.service;
 
+import java.util.Arrays;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.footbalmanager.app.domain.League;
 import com.footbalmanager.app.domain.Season;
@@ -7,23 +18,18 @@ import com.footbalmanager.app.domain.Team;
 import com.footbalmanager.app.repository.TeamRepository;
 import com.footbalmanager.app.services.TeamService;
 import com.footbalmanager.app.services.TeamServiceImpl;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class TeamServiceImplTest {
+
+	@TestConfiguration
+	static class BaseServiceImplTestContextConfiguration {
+
+		@Bean
+		public TeamService teamService() {
+			return new TeamServiceImpl();
+		}
+	}
 
     @MockBean
     private TeamRepository teamRepository;

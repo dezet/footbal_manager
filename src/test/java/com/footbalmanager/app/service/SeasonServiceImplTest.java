@@ -1,26 +1,36 @@
 package com.footbalmanager.app.service;
 
+import java.util.Arrays;
 
-import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.repository.SeasonRepository;
-import com.footbalmanager.app.services.SeasonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
+import com.footbalmanager.app.domain.Season;
+import com.footbalmanager.app.repository.SeasonRepository;
+import com.footbalmanager.app.services.SeasonService;
+import com.footbalmanager.app.services.SeasonServiceImpl;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class SeasonServiceImplTest {
+
+	@TestConfiguration
+	static class BaseServiceImplTestContextConfiguration {
+
+		@Bean
+		public SeasonService seasonService() {
+			return new SeasonServiceImpl();
+		}
+	}
 
     @MockBean
     private SeasonRepository seasonRepository;
