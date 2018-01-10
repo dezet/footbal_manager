@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <header>
+    <!--header>
       <main-menu/>
-    </header>
+    </header-->
 
 
     <div class="main">
@@ -21,16 +21,3 @@
     }
   }
 </script>
-
-<style>
-
-  .main {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    min-height: 360px;
-    display: flex;
-  }
-#app {
-}
-</style>
