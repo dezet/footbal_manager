@@ -65,9 +65,9 @@
       addPlayer: function () {
         let self = this
         axios.post(this.$config.API + 'players', this.newPlayer).then(response => {
-          console.log(self.players);
+          console.log(self.players)
           self.players.push(this.newPlayer)
-          console.log(self.players);
+          console.log(self.players)
           self.newPlayer = {}
         }).catch(e => {
           throw e

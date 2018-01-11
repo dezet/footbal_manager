@@ -1,5 +1,5 @@
 <template>
-  <nav id="mainMenu" class="navbar navbar-inverse navbar-static-top">
+  <nav id="main-menu" class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuCollapse" aria-expanded="false">
@@ -8,21 +8,24 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Football manager</a>
+        <a class="navbar-brand" href="#header">Football manager</a>
       </div>
 
       <div class="collapse navbar-collapse" id="menuCollapse">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">Test 1</a>
+            <a href="#about-us">O nas</a>
           </li>
           <li>
-            <a href="#">Test 2</a>
+            <a href="#creators">Twórcy</a>
           </li>
           <li>
-            <a href="#">Test 3</a>
+            <a href="#contact">Kontakt</a>
           </li>
         </ul>
+
+        <a href="" class="btn btn-success navbar-btn navbar-right nav-btn">Logowanie</a>
+        <a href="" class="btn btn-primary navbar-btn navbar-right nav-btn">Rejestracja</a>
       </div>
     </div>
 
@@ -31,7 +34,33 @@
 
 <script>
   export default {
-    name: 'main-menu'
+    name: 'main-menu',
+    navbar: null,
+    sticky: null,
+    methods: {
+      handleSticky () {
+        if (window.pageYOffset >= this.sticky) {
+          this.navbar.classList.add('sticky')
+        } else {
+          this.navbar.classList.remove('sticky')
+        }
+      },
+      setSticky () {
+        console.log(this.navbar.offsetTop)
+        this.sticky = this.navbar.offsetTop
+      }
+    },
+    created () {
+      window.addEventListener('resize', this.setSticky)
+      window.addEventListener('scroll', this.handleSticky)
+    },
+    mounted () {
+      this.navbar = document.getElementById('main-menu')
+      this.sticky = this.navbar.offsetTop
+    },
+    destroyed () {
+      window.removeEventListener('scroll', this.handleSticky)
+    }
   }
 </script>
 

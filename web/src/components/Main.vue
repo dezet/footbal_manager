@@ -1,37 +1,40 @@
 <template>
-  <div class="mainWrapper">
-    <h1 class="text-center">
-      Witaj w Football Manager!
-    </h1>
-    <p>
-      Dzisiaj jest {{ date }}
-    </p>
+  <div class="wrapper">
+    <header>
+      <section id="header">
+        <div id="title">
+          <h1>Witaj w Football Managerze!</h1>
+        </div>
+      </section>
+      <main-menu/>
+    </header>
+
+    <section id="about-us"></section>
+
+    <section id="fixed-1"></section>
+
+    <section id="creators"></section>
+
+    <section id="contact"></section>
+
+    <footer>
+      <section id="footer"></section>
+    </footer>
   </div>
 </template>
 
 <script>
-  function getNowDate () {
-    var date = new Date()
-    var str = ''
-
-    if (date.getDate() < 10) str += ('0' + date.getDate())
-    else str += date.getDate()
-
-    str += '-' + date.getMonth() + '-' + date.getFullYear()
-
-    return str
-  }
-
-  var data = {
-    message: 'Siemka',
-    date: getNowDate()
-  }
+  import MainMenu from '@/components/MainMenu'
 
   export default {
     name: 'Main',
-
-    data: function () {
-      return data
+    components: {
+      'main-menu': MainMenu
+    },
+    methods: {
+      pageScroll () {
+        window.scrollBy(0, 5)
+      }
     }
   }
 </script>
