@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // URL and endpoint constants
 const LOGIN_URL = 'http://localhost:8124/login'
-const SIGNUP_URL = 'http://localhost:8124/sign-up'
+const SIGNUP_URL = 'http://localhost:8124/players'
 
 export default {
 
@@ -16,8 +16,7 @@ export default {
   login (creds, redirect) {
     axios.post(LOGIN_URL, creds).then(
       (response) => {
-        localStorage.setItem('id_token', response.id_token)
-        localStorage.setItem('access_token', response.access_token)
+        localStorage.setItem('access_token', response.headers.access_token)
 
         this.user.authenticated = true
 
@@ -35,7 +34,6 @@ export default {
   signup (creds, redirect) {
     axios.post(SIGNUP_URL, creds).then(
       (response) => {
-        localStorage.setItem('id_token', response.id_token)
         localStorage.setItem('access_token', response.access_token)
 
         this.user.authenticated = true
@@ -52,14 +50,14 @@ export default {
 
   // To log out, we just need to remove the token
   logout () {
-    localStorage.removeItem('id_token')
     localStorage.removeItem('access_token')
     this.user.authenticated = false
   },
 
   checkAuth () {
-    let jwt = localStorage.getItem('id_token')
-    this.user.authenticated = !!jwt
+    let jwt = localStorage.getItem('access_token')
+    this.user.authenticated = jwt !== 'undefined'
+    return this.user.authenticated
   },
 
   // The object to be passed as a header for authenticated requests

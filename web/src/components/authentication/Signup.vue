@@ -29,6 +29,9 @@
       >
     </div>
     <div class="form-group">
+      <input type="text" class="form-control" placeholder="Enter your email address" v-model="credentials.email">
+    </div>
+    <div class="form-group">
       <input
         type="password"
         class="form-control"
@@ -50,6 +53,7 @@
         credentials: {
           firstname: '',
           lastname: '',
+          email: '',
           username: '',
           password: ''
         },
@@ -60,6 +64,7 @@
       submit () {
         var credentials = {
           firstname: this.credentials.firstname,
+          email: this.credentials.email,
           lastname: this.credentials.lastname,
           username: this.credentials.username,
           password: this.credentials.password

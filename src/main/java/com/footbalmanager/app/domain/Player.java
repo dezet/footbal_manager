@@ -1,9 +1,16 @@
 package com.footbalmanager.app.domain;
 
-
 import java.util.Collection;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,23 +31,31 @@ public class Player implements UserDetails {
 	private String username;
     @Column(nullable = false)
     private String password;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "team_id")
+	@Column(nullable = false)
+	private String email;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "team_id")
     private Team team;
 
     Player() {
     }
 
-    public Player(String firstname, String lastname) {
-        notNull(firstname, "Please provide firstname");
-        notNull(lastname, "Please provide lastname");
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
+	public Player(String firstname, String lastname, String username, String password, String email) {
+		notNull(firstname, "Please provide firstname");
+		notNull(lastname, "Please provide lastname");
+		notNull(username, "Please provide username");
+		notNull(password, "Please provide password");
+		notNull(email, "Please provide email");
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
     public void setId(Long id) {
         this.id = id;

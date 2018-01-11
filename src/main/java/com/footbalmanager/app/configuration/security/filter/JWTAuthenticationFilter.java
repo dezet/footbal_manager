@@ -1,10 +1,14 @@
 package com.footbalmanager.app.configuration.security.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.footbalmanager.app.domain.Player;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,18 +16,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.footbalmanager.app.domain.Player;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import static com.footbalmanager.app.configuration.security.SecurityConstants.EXPIRATION_TIME;
-import static com.footbalmanager.app.configuration.security.SecurityConstants.HEADER_STRING;
 import static com.footbalmanager.app.configuration.security.SecurityConstants.SECRET;
-import static com.footbalmanager.app.configuration.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
@@ -61,6 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
 				.compact();
-		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+		res.addHeader("Access-Control-Expose-Headers", "access_token");
+		res.addHeader("access_token", token);
 	}
 }

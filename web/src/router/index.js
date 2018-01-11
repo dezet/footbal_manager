@@ -5,33 +5,52 @@ import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
 import AddPlayers from '@/components/AddPlayers'
+import auth from '../authentication'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       name: 'Main',
-      component: Main
+      component: Main,
+      meta: {requiresAuth: false}
     },
     {
       path: '/players',
       name: 'Players',
-      component: Players
+      component: Players,
+      meta: {requiresAuth: true}
     },
     {
       path: '/newplayer',
       name: 'new players',
-      component: AddPlayers
+      component: AddPlayers,
+      meta: {requiresAuth: true}
     },
     {
       path: '/login',
-      component: Login
+      component: Login,
+      meta: {requiresAuth: false}
     },
     {
       path: '/signup',
-      component: Signup
+      component: Signup,
+      meta: {requiresAuth: false}
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (auth.checkAuth()) {
+      next()
+    } else {
+      next('/')
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
