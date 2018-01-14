@@ -61,8 +61,9 @@ public class PlayerController extends BaseController {
 	}
 
 	@PostMapping("/sign-up")
-	public void signUp(@RequestBody Player player) {
-		player.setPassword(bCryptPasswordEncoder.encode(player.getPassword()));
-		playerRepository.save(player);
+	public ResponseEntity<?> signUp(@RequestBody PostPlayerRequestDto player) {
+        //TODO: obsługa wyjątków
+        playerService.save(player);
+        return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
