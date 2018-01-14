@@ -24,8 +24,9 @@
           </li>
         </ul>
 
-        <a href="" class="btn btn-success navbar-btn navbar-right nav-btn">Logowanie</a>
-        <a href="" class="btn btn-primary navbar-btn navbar-right nav-btn">Rejestracja</a>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-on:click="onLoginClicked">Logowanie</button>
+        <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-on:click="onSingUpClicked">Rejestracja
+        </button>
       </div>
     </div>
 
@@ -48,6 +49,12 @@
       setSticky () {
         console.log(this.navbar.offsetTop)
         this.sticky = this.navbar.offsetTop
+      },
+      onLoginClicked () {
+        this.$router.push({path: '/login'})
+      },
+      onSingUpClicked () {
+        this.$router.push({path: '/signup'})
       }
     },
     created () {

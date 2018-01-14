@@ -42,8 +42,8 @@ public class PlayerServiceImplTest {
 
     @Before
     public void setUp() {
-        player = new Player("Dominik", "Domdomin");
-    }
+		player = new Player("Dominik", "Domdomin", "domcio", "dddd111", "d@d.pl");
+	}
 
     @Test
     public void whenSave_thenCorrect() {

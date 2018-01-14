@@ -1,18 +1,28 @@
 package com.footbalmanager.app.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.footbalmanager.app.domain.Player;
 import com.footbalmanager.app.dto.player.PatchPlayerRequestDto;
 import com.footbalmanager.app.dto.player.PostPlayerRequestDto;
 import com.footbalmanager.app.repository.PlayerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import static java.util.Collections.emptyList;
 
 @Service("playerService")
 @Transactional
-public class PlayerServiceImpl implements PlayerService {
-    @Autowired
-    private PlayerRepository playerRepository;
+public class PlayerServiceImpl implements PlayerService, UserDetailsService {
+	@Autowired
+	private PlayerRepository playerRepository;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void update(Long playerId, PatchPlayerRequestDto dto) {
@@ -46,7 +56,17 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void save(PostPlayerRequestDto dto) {
-        Player p = new Player(dto.getFirstname(), dto.getLastname());
-        this.playerRepository.save(p);
-    }
+		Player player = new Player(dto.getFirstname(), dto.getLastname(), dto.getUsername(),
+				bCryptPasswordEncoder.encode(dto.getPassword()), dto.getEmail());
+		playerRepository.save(player);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Player player = playerRepository.findByUsername(username);
+		if (player == null) {
+			throw new UsernameNotFoundException(username);
+		}
+		return new User(player.getUsername(), player.getPassword(), emptyList());
+	}
 }
