@@ -24,8 +24,14 @@
           </li>
         </ul>
 
-        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-on:click="onLoginClicked">Logowanie</button>
-        <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-on:click="onSingUpClicked">Rejestracja
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-visible="userLogged"
+                v-on:click="onLoginClicked">Logowanie
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-visible="!userLogged"
+                v-on:click="onLoginClicked">Wyloguj
+        </button>
+        <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-visible="userLogged"
+                v-on:click="onSingUpClicked">Rejestracja
         </button>
       </div>
     </div>
@@ -34,6 +40,8 @@
 </template>
 
 <script>
+  /* eslint-disable */
+  import auth from '../authentication'
   export default {
     name: 'main-menu',
     navbar: null,
@@ -55,6 +63,9 @@
       },
       onSingUpClicked () {
         this.$router.push({path: '/signup'})
+      },
+      userLogged () {
+        return auth.checkAuth()
       }
     },
     created () {
