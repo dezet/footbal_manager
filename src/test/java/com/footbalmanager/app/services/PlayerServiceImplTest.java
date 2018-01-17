@@ -1,4 +1,4 @@
-package com.footbalmanager.app.service;
+package com.footbalmanager.app.services;
 
 import java.util.Arrays;
 
@@ -13,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.footbalmanager.app.domain.Player;
 import com.footbalmanager.app.repository.PlayerRepository;
-import com.footbalmanager.app.services.PlayerService;
-import com.footbalmanager.app.services.PlayerServiceImpl;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;

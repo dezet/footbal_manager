@@ -1,4 +1,4 @@
-package com.footbalmanager.app.service;
+package com.footbalmanager.app.services;
 
 import java.util.Arrays;
 
@@ -11,86 +11,82 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.footbalmanager.app.domain.League;
 import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.repository.LeagueRepository;
-import com.footbalmanager.app.services.LeagueService;
-import com.footbalmanager.app.services.LeagueServiceImpl;
+import com.footbalmanager.app.repository.SeasonRepository;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
 
 @RunWith(SpringRunner.class)
-public class LeagueServiceImplTest {
+public class SeasonServiceImplTest {
 
 	@TestConfiguration
 	static class BaseServiceImplTestContextConfiguration {
 
 		@Bean
-		public LeagueService leagueService() {
-			return new LeagueServiceImpl();
+		public SeasonService seasonService() {
+			return new SeasonServiceImpl();
 		}
 	}
 
     @MockBean
-    private LeagueRepository leagueRepository;
+    private SeasonRepository seasonRepository;
+
     @Autowired
-    private LeagueService leagueService;
+    private SeasonService seasonService;
 
     private Season season;
-    private League league;
 
     @Before
     public void setUp() {
-        season = new Season("sezon1", "2017");
-        league = new League("name", season);
+        season = new Season("Dominik", "2017");
     }
 
     @Test
     public void whenSave_thenCorrect() {
-        given(leagueRepository.save(league))
-                .willReturn(league);
-        leagueService.save(league);
-        then(leagueRepository)
+        given(seasonRepository.save(season))
+                .willReturn(season);
+        seasonService.save(season);
+        then(seasonRepository)
                 .should(times(1))
-                .save(league);
+                .save(season);
     }
 
     @Test
     public void whenFindOne_thenCorrect() {
-        given(leagueRepository.findOne(10L))
-                .willReturn(league);
-        leagueService.findOne(10L);
-        then(leagueRepository)
+        given(seasonRepository.findOne(10L))
+                .willReturn(season);
+        seasonService.findOne(10L);
+        then(seasonRepository)
                 .should(times(1))
                 .findOne(10L);
     }
 
     @Test
     public void whenFindAll_thenCorrect() {
-        given(leagueRepository.findAll())
-                .willReturn(Arrays.asList(league));
-        leagueService.findAll();
-        then(leagueRepository)
+        given(seasonRepository.findAll())
+                .willReturn(Arrays.asList(season));
+        seasonService.findAll();
+        then(seasonRepository)
                 .should(times(1))
                 .findAll();
     }
 
     @Test
     public void whenDeleteById_thenCorrect() {
-        leagueService.delete(10L);
-        then(leagueRepository)
+        seasonService.delete(10L);
+        then(seasonRepository)
                 .should(times(1))
                 .delete(10L);
     }
 
     @Test
     public void whenDeleteByEntity_thenCorrect() {
-        leagueService.delete(league);
-        then(leagueRepository)
+        seasonService.delete(season);
+        then(seasonRepository)
                 .should(times(1))
-                .delete(league);
+                .delete(season);
     }
 }
 

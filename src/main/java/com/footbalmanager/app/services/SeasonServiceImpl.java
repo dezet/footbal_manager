@@ -51,4 +51,9 @@ public class SeasonServiceImpl implements SeasonService {
         this.seasonRepository.save(newSeason);
         //mozna ewentualnie zwrócić season.
     }
+
+    @Override
+    public Iterable<Season> save(Iterable<Season> entities) {
+        return seasonRepository.save(entities);
+    }
 }

@@ -49,4 +49,9 @@ public class LeagueServiceImpl implements LeagueService {
     public void save(PostLeagueRequestDto dto) {
         //TODO: dto -> entity i save, nie piszę póki nie znamy pól
     }
+
+    @Override
+    public Iterable<League> save(Iterable<League> entities) {
+        return leagueRepository.save(entities);
+    }
 }

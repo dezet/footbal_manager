@@ -1,4 +1,4 @@
-package com.footbalmanager.app.service;
+package com.footbalmanager.app.services;
 
 import java.util.Arrays;
 
@@ -16,8 +16,6 @@ import com.footbalmanager.app.domain.League;
 import com.footbalmanager.app.domain.Season;
 import com.footbalmanager.app.domain.Team;
 import com.footbalmanager.app.repository.TeamRepository;
-import com.footbalmanager.app.services.TeamService;
-import com.footbalmanager.app.services.TeamServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class TeamServiceImplTest {

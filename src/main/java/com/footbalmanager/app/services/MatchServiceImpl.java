@@ -49,4 +49,9 @@ public class MatchServiceImpl implements MatchService {
     public void delete(Match entity) {
         matchRepository.delete(entity);
     }
+
+    @Override
+    public Iterable<Match> save(Iterable<Match> entities) {
+        return matchRepository.save(entities);
+    }
 }

@@ -4,14 +4,26 @@ import com.footbalmanager.app.abstraction.BaseController;
 import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
 import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
 import com.footbalmanager.app.services.SeasonService;
+import com.footbalmanager.app.services.TimetableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 @RestController
 public class SeasonController extends BaseController {
     @Autowired
     private SeasonService seasonService;
+
+    @Autowired
+    private TimetableService timetableService;
+
+
+    @GetMapping("/seasons/{seasonId}/generate")
+    public ResponseEntity<?> generateTimetable(@PathVariable Long seasonId) {
+        timetableService.generate(seasonService.findOne(seasonId));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @GetMapping("/seasons")
     public ResponseEntity<?> getMatches() {

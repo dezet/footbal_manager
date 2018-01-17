@@ -1,5 +1,6 @@
 package com.footbalmanager.app.services;
 
+import com.footbalmanager.app.domain.Season;
 import com.footbalmanager.app.domain.Team;
 import com.footbalmanager.app.dto.team.PatchTeamRequestDto;
 import com.footbalmanager.app.dto.team.PostTeamRequestDto;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service("teamService")
 @Transactional
@@ -50,5 +52,15 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public void save(PostTeamRequestDto dto) {
         //TODO: dto -> entity i save, nie piszę póki nie znamy pól wszystkich
+    }
+
+    @Override
+    public Iterable<Team> save(Iterable<Team> entities) {
+        return teamRepository.save(entities);
+    }
+
+    @Override
+    public List<Team> findTeamsBySeason(Season season) {
+        return this.teamRepository.findAllBySeason(season.getId());
     }
 }

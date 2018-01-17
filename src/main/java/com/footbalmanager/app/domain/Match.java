@@ -47,13 +47,13 @@ public class Match {
     }
 
     public Match(Team home, Team away, LocalDateTime date, Integer homeScore, Integer awayScore, Boolean played, League league) {
-        notNull(home, "Please provide home team");
-        notNull(away, "Please provide away team");
-        notNull(date, "Please provide date");
-        notNull(homeScore, "Please provide home score");
-        notNull(awayScore, "Please provide away score");
-        notNull(played, "Please if match was played");
-        notNull(league, "Please provide league");
+//        notNull(home, "Please provide home team");
+//        notNull(away, "Please provide away team");
+//        notNull(date, "Please provide date");
+//        notNull(homeScore, "Please provide home score");
+//        notNull(awayScore, "Please provide away score");
+//        notNull(played, "Please if match was played");
+//        notNull(league, "Please provide league");
         this.home = home;
         this.away = away;
         this.date = date;

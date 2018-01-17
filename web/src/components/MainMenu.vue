@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  import auth from '../authentication'
   export default {
     name: 'main-menu',
     navbar: null,

@@ -5,6 +5,7 @@ import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
 import AddPlayers from '@/components/AddPlayers'
+import GenerateTimetable from '@/components/GenerateTimetable'
 import auth from '../authentication'
 
 Vue.use(Router)
@@ -21,6 +22,12 @@ const router = new Router({
       path: '/players',
       name: 'Players',
       component: Players,
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/timetable',
+      name: 'Timetable',
+      component: GenerateTimetable,
       meta: {requiresAuth: true}
     },
     {

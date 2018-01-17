@@ -19,7 +19,7 @@ public class League {
     @OneToMany(mappedBy = "league")
     private Collection<Match> matches = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "away_team_id", nullable = false)
+    @JoinColumn(name = "season_id", nullable = false)
     private Season season;
 
     League() {

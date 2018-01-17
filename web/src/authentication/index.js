@@ -1,8 +1,10 @@
-import router from '../router'
+//import router from '../router'
 import axios from 'axios'
+// let router = require('../router/index.js')
+//  let axios  = require('axios')
 
 // URL and endpoint constants
-const LOGIN_URL = 'http://localhost:8124/login'
+const LOGIN_URL  = 'http://localhost:8124/login'
 const SIGNUP_URL = 'http://localhost:8124/players'
 
 export default {
@@ -25,16 +27,16 @@ export default {
           router.push(redirect)
         }
       },
-    (err) => {
-      console.log(err)
-      return this.user.authenticated
-    })
+      (err) => {
+        console.log(err)
+        return this.user.authenticated
+      })
   },
 
   signup (creds, redirect) {
     axios.post(SIGNUP_URL, creds).then(
       (response) => {
-        localStorage.setItem('access_token', response.access_token)
+        localStorage.setItem('access_token', response.access_token);
 
         this.user.authenticated = true
 
@@ -55,7 +57,7 @@ export default {
   },
 
   checkAuth () {
-    let jwt = localStorage.getItem('access_token')
+    let jwt                 = localStorage.getItem('access_token')
     this.user.authenticated = jwt !== 'undefined'
     return this.user.authenticated
   },
