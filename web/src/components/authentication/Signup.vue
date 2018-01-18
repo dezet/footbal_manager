@@ -45,6 +45,7 @@
 
 <script>
   import auth from '../../authentication'
+
   export default {
     data () {
       return {
@@ -69,9 +70,15 @@
           username: this.credentials.username,
           password: this.credentials.password
         }
-        // We need to pass the component's this context
-        // to properly make use of http in the auth service
-        auth.signup(credentials, 'Players')
+        auth.signup(credentials).then(
+          (response) => {
+            this.$router.push('/login')
+          },
+
+          (err) => {
+            console.log(err)
+            this.error = 'Authentication failed!'
+          })
       }
     }
 

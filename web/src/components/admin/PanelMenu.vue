@@ -35,7 +35,7 @@
 
 <script>
     export default {
-        name: "panel-menu"
+      name: 'panel-menu'
     }
 </script>
 

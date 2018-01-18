@@ -24,8 +24,14 @@
           </li>
         </ul>
 
-        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-on:click="onLoginClicked">Logowanie</button>
-        <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-on:click="onSingUpClicked">Rejestracja
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="!userLogged()"
+                v-on:click="onLoginClicked">Logowanie
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+                v-on:click="onLogoutClicked">Wyloguj
+        </button>
+        <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-if="!userLogged()"
+                v-on:click="onSingUpClicked">Rejestracja
         </button>
       </div>
     </div>
@@ -35,6 +41,7 @@
 
 <script>
   import auth from '../authentication'
+
   export default {
     name: 'main-menu',
     navbar: null,
@@ -54,8 +61,15 @@
       onLoginClicked () {
         this.$router.push({path: '/login'})
       },
+      onLogoutClicked () {
+        auth.logout()
+        window.location.reload()
+      },
       onSingUpClicked () {
         this.$router.push({path: '/signup'})
+      },
+      userLogged () {
+        return auth.checkAuth()
       }
     },
     created () {
