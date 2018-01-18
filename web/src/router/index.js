@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
+import Panel from '@/components/admin/Panel'
 import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
@@ -18,6 +19,12 @@ const router = new Router({
       path: '/',
       name: 'Main',
       component: Main,
+      meta: {requiresAuth: false}
+    },
+    {
+      path: '/panel',
+      name: 'Panel',
+      component: Panel,
       meta: {requiresAuth: false}
     },
     {
@@ -59,7 +66,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (auth.checkAuth()) {
-      next()
+      next('/panel')
     } else {
       next('/')
     }
