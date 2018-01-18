@@ -22,7 +22,7 @@
   import PanelMenu from '@/components/admin/PanelMenu'
 
   export default {
-    name: "Panel",
+    name: 'Panel',
     components: {
       'panel-menu': PanelMenu
     }
