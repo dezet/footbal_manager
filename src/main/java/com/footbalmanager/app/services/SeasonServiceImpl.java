@@ -1,12 +1,13 @@
 package com.footbalmanager.app.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.footbalmanager.app.domain.Season;
 import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
 import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
 import com.footbalmanager.app.repository.SeasonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("seasonService")
 @Transactional
@@ -16,7 +17,7 @@ public class SeasonServiceImpl implements SeasonService {
     private SeasonRepository seasonRepository;
 
     @Override
-    public void update(Long leagueId, PatchSeasonRequestDto dto) {
+	public void update(Long id, PatchSeasonRequestDto dto) {
         //TODO: zostawiam na później
     }
 
@@ -48,11 +49,18 @@ public class SeasonServiceImpl implements SeasonService {
     @Override
     public void save(PostSeasonRequestDto dto) {
         Season newSeason = new Season(dto.getName(), dto.getYear());
-        this.seasonRepository.save(newSeason);
+		seasonRepository.save(newSeason);
         //mozna ewentualnie zwrócić season.
     }
 
-    @Override
+	@Override
+	public void close(Long id) {
+		Season season = seasonRepository.findOne(id);
+		season.setOpen(false);
+		seasonRepository.save(season);
+	}
+
+	@Override
     public Iterable<Season> save(Iterable<Season> entities) {
         return seasonRepository.save(entities);
     }

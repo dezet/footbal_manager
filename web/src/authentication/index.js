@@ -1,69 +1,46 @@
-//import router from '../router'
 import axios from 'axios'
-// let router = require('../router/index.js')
-//  let axios  = require('axios')
 
 // URL and endpoint constants
-const LOGIN_URL  = 'http://localhost:8124/login'
+const LOGIN_URL = 'http://localhost:8124/login'
 const SIGNUP_URL = 'http://localhost:8124/players'
 
-export default {
+export default class Authentication {
+  static login (creds) {
+    return new Promise((resolve, reject) => {
+      axios.post(LOGIN_URL, creds).then(
+        (response) => {
+          localStorage.setItem('access_token', response.headers.access_token)
+          resolve(true)
+        },
+        (err) => {
+          reject(err)
+        })
+    })
+  }
 
-  // User object will let us check authentication status
-  user: {
-    authenticated: false
-  },
-
-  // Send a request to the login URL and save the returned JWT
-  login (creds, redirect) {
-    axios.post(LOGIN_URL, creds).then(
+  static signup (creds) {
+    return new Promise((resolve, reject) => {
+      axios.post(SIGNUP_URL, creds).then(
       (response) => {
-        localStorage.setItem('access_token', response.headers.access_token)
-
-        this.user.authenticated = true
-
-        // Redirect to a specified route
-        if (redirect) {
-          router.push(redirect)
-        }
+        localStorage.setItem('access_token', response.access_token)
+        resolve(true)
       },
       (err) => {
-        console.log(err)
-        return this.user.authenticated
+        reject(err)
       })
-  },
+    })
+  }
 
-  signup (creds, redirect) {
-    axios.post(SIGNUP_URL, creds).then(
-      (response) => {
-        localStorage.setItem('access_token', response.access_token);
-
-        this.user.authenticated = true
-
-        // Redirect to a specified route
-        if (redirect) {
-          router.push(redirect)
-        }
-      },
-      (err) => {
-        console.log(err)
-      })
-  },
-
-  // To log out, we just need to remove the token
-  logout () {
+  static logout () {
     localStorage.removeItem('access_token')
-    this.user.authenticated = false
-  },
+  }
 
-  checkAuth () {
-    let jwt                 = localStorage.getItem('access_token')
-    this.user.authenticated = jwt !== 'undefined'
-    return this.user.authenticated
-  },
+  static checkAuth () {
+    let jwt = localStorage.getItem('access_token')
+    return (jwt !== 'undefined' && jwt !== null)
+  }
 
-  // The object to be passed as a header for authenticated requests
-  getAuthHeader () {
+  static getAuthHeader () {
     return {
       'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     }
