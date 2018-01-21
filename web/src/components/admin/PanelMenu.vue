@@ -9,16 +9,16 @@
     <main>
       <ul>
         <li>
-          <a href="/panel/#">Sezony</a>
+          <a href="#/panel">Sezony</a>
         </li>
         <li>
-          <a href="/panel/#">Ligi</a>
+          <a href="#/panel">Ligi</a>
         </li>
         <li>
-          <a href="/panel/#">Zespoły</a>
+          <a href="#/panel">Zespoły</a>
         </li>
         <li>
-          <a href="/panel/#">Mecze</a>
+          <a href="#/panel">Mecze</a>
         </li>
         <hr>
         <li>
