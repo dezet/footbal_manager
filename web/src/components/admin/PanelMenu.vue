@@ -9,20 +9,21 @@
     <main>
       <ul>
         <li>
-          <a href="#/panel">Sezony</a>
+          <a href="/panel">Sezony</a>
         </li>
         <li>
-          <a href="#/panel">Ligi</a>
+          <a href="/panel">Ligi</a>
         </li>
         <li>
-          <a href="#/panel">Zespoły</a>
+          <a href="/panel">Zespoły</a>
         </li>
         <li>
-          <a href="#/panel">Mecze</a>
+          <a href="/panel">Mecze</a>
         </li>
         <hr>
         <li>
-          <a href="#">Wyloguj</a>
+          <button class="button-unstyled" v-on:click="onLogoutClicked">Wyloguj
+          </button>
         </li>
       </ul>
     </main>
@@ -34,11 +35,25 @@
 </template>
 
 <script>
-    export default {
-      name: 'panel-menu'
+  import auth from '../../authentication'
+  import router from '../../router'
+
+  export default {
+    name: 'panel-menu',
+    methods: {
+      onLogoutClicked () {
+        auth.logout()
+        router.push('/')
+      }
     }
+  }
 </script>
 
 <style scoped>
+
+  .button-unstyled {
+    border: none;
+    background: transparent;
+  }
 
 </style>
