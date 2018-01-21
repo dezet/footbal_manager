@@ -1,8 +1,17 @@
 package com.footbalmanager.app.domain;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -14,7 +23,7 @@ public class Team {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
     @OneToMany(mappedBy = "team")
@@ -59,7 +68,7 @@ public class Team {
     }
 
     public void addPlayer(Player p) {
-        this.players.add(p);
+		players.add(p);
     }
 
     public Collection<Player> getPlayers() {
@@ -79,7 +88,7 @@ public class Team {
     }
 
     public void addHomeMatch(Match m) {
-        this.homeMatches.add(m);
+		homeMatches.add(m);
     }
 
     public Collection<Match> getAwayMatches() {
@@ -91,6 +100,6 @@ public class Team {
     }
 
     public void addAwayMatch(Match m) {
-        this.awayMatches.add(m);
+		awayMatches.add(m);
     }
 }

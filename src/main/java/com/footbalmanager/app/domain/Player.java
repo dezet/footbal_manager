@@ -2,7 +2,6 @@ package com.footbalmanager.app.domain;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +32,7 @@ public class Player implements UserDetails {
     private String password;
 	@Column(nullable = false)
 	private String email;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
     private Team team;
 

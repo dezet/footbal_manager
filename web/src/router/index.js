@@ -67,7 +67,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (auth.checkAuth()) {
-      next('/panel')
+      next()
     } else {
       next('/')
     }

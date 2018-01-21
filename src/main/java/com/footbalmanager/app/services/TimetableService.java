@@ -1,15 +1,20 @@
 package com.footbalmanager.app.services;
 
-import com.footbalmanager.app.domain.Match;
-import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.domain.Team;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.util.*;
+import com.footbalmanager.app.domain.Match;
+import com.footbalmanager.app.domain.Season;
+import com.footbalmanager.app.domain.Team;
 
 @Service("timetableService")
 @Transactional
@@ -52,8 +57,7 @@ public class TimetableService {
                 if (!home.getId().equals(away.getId())) {
                     Optional<LocalDateTime> matchDate = findDateForTeams(home, away, teamSchedules, applicableWeekends);
                     if (matchDate.isPresent()) {
-                        matches.add(new Match(home, away, matchDate.get(),
-                                0, null, false, home.getLeague()));
+                        matches.add(new Match(home, away, matchDate.get(), 0, 0, false, home.getLeague()));
                         List<LocalDateTime> teamTimetable = teamSchedules.get(home);
                         teamTimetable.add(matchDate.get());
                     } else {

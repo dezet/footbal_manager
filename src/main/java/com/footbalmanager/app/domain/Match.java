@@ -1,11 +1,18 @@
 package com.footbalmanager.app.domain;
 
-import com.footbalmanager.app.util.converter.LocalDateTimeAttributeConverter;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import static org.springframework.util.Assert.notNull;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.footbalmanager.app.util.converter.LocalDateTimeAttributeConverter;
 
 @Entity
 public class Match {
@@ -31,15 +38,15 @@ public class Match {
     @Column(name = "played", nullable = false)
     private Boolean played = false;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id", nullable = false)
     private Team home;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_team_id", nullable = false)
     private Team away;
 
