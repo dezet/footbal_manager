@@ -9,4 +9,6 @@ public interface MatchService extends Service<Match> {
     void update(Long leagueId, PatchMatchRequestDto dto);
 
     void save(PostMatchRequestDto dto);
+
+    Iterable<Match> findBySeason(Long seasonId);
 }

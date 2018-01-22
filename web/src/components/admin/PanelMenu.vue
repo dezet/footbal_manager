@@ -9,7 +9,7 @@
     <main>
       <ul>
         <li>
-          <a href="/panel/#">Sezony</a>
+          <a href="#/panel/seasons">Sezony</a>
         </li>
         <li>
           <a href="/panel/#">Ligi</a>
@@ -26,9 +26,7 @@
         </li>
       </ul>
     </main>
-
     <footer>
-
     </footer>
   </nav>
 </template>

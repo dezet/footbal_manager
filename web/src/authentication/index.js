@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // URL and endpoint constants
-const LOGIN_URL = 'http://localhost:8124/login'
+const LOGIN_URL  = 'http://localhost:8124/login'
 const SIGNUP_URL = 'http://localhost:8124/players'
 
 export default class Authentication {
@@ -21,13 +21,13 @@ export default class Authentication {
   static signup (creds) {
     return new Promise((resolve, reject) => {
       axios.post(SIGNUP_URL, creds).then(
-      (response) => {
-        localStorage.setItem('access_token', response.access_token)
-        resolve(true)
-      },
-      (err) => {
-        reject(err)
-      })
+        (response) => {
+          localStorage.setItem('access_token', response.access_token)
+          resolve(true)
+        },
+        (err) => {
+          reject(err)
+        })
     })
   }
 
@@ -42,7 +42,11 @@ export default class Authentication {
 
   static getAuthHeader () {
     return {
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      headers: {
+        Authorization: localStorage.getItem('access_token') !== 'undefined'
+          ? `Bearer ${localStorage.getItem('access_token')}`
+          : ''
+      }
     }
   }
 }

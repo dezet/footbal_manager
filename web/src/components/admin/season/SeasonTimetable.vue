@@ -2,14 +2,12 @@
   <div class="wrapper">
     <div class="row">
       <div class="panel-sidebar">
-        <panel-menu>
-
-        </panel-menu>
+        <panel-menu></panel-menu>
       </div>
       <div class="panel-main">
         <header>
           <div class="page-title-wrapper">
-            <h1 class="page-title">Tytuł strony</h1>
+            <h1 class="page-title">Informacje o sezonie</h1>
           </div>
         </header>
 

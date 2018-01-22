@@ -6,9 +6,9 @@ import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
 import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
 
 public interface SeasonService extends Service<Season> {
-	void update(Long id, PatchSeasonRequestDto dto);
+    void update(Long id, PatchSeasonRequestDto dto);
 
     void save(PostSeasonRequestDto dto);
 
-	void close(Long id);
+    void close(Long id);
 }

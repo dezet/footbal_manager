@@ -53,7 +53,7 @@ public class TimetableService {
                     Optional<LocalDateTime> matchDate = findDateForTeams(home, away, teamSchedules, applicableWeekends);
                     if (matchDate.isPresent()) {
                         matches.add(new Match(home, away, matchDate.get(),
-                                0, null, false, home.getLeague()));
+                                0, 0, false, home.getLeague()));
                         List<LocalDateTime> teamTimetable = teamSchedules.get(home);
                         teamTimetable.add(matchDate.get());
                     } else {

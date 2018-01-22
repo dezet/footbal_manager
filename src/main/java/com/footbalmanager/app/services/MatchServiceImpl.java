@@ -54,4 +54,9 @@ public class MatchServiceImpl implements MatchService {
     public Iterable<Match> save(Iterable<Match> entities) {
         return matchRepository.save(entities);
     }
+
+    @Override
+    public Iterable<Match> findBySeason(Long seasonId) {
+        return matchRepository.findBySeason(seasonId);
+    }
 }

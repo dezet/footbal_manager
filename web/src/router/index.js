@@ -6,8 +6,10 @@ import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
 import AddPlayers from '@/components/AddPlayers'
-import Seasons from '@/components/Seasons'
+import SeasonsPage from '@/components/admin/season/SeasonsPage'
+import SeasonPage from '@/components/admin/season/SeasonPage'
 import GenerateTimetable from '@/components/GenerateTimetable'
+
 import auth from '../authentication'
 
 Vue.use(Router)
@@ -28,6 +30,18 @@ const router = new Router({
       meta: {requiresAuth: false}
     },
     {
+      path: '/panel/seasons',
+      name: 'SeasonsPage',
+      component: SeasonsPage,
+      meta: {requiresAuth: false}
+    },
+    {
+      path: '/panel/seasons/:id',
+      name: 'SeasonPage',
+      component: SeasonPage,
+      meta: {requiresAuth: false}
+    },
+    {
       path: '/players',
       name: 'Players',
       component: Players,
@@ -43,12 +57,6 @@ const router = new Router({
       path: '/newplayer',
       name: 'new players',
       component: AddPlayers,
-      meta: {requiresAuth: true}
-    },
-    {
-      path: '/seasons',
-      name: 'close season',
-      component: Seasons,
       meta: {requiresAuth: true}
     },
     {

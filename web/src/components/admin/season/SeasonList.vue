@@ -11,16 +11,16 @@
         </tr>
         </thead>
         <tbody name="table-row">
-        <tr v-for="season in seasons" :key="season.id">
+        <tr v-for="season in seasons" :key="season.id" v-on:click="showSeason(season.id)">
           <td :key="season.id">
           <td>{{season.name}}</td>
           <td>{{season.year}}</td>
           <td>{{season.open}}</td>
           <td>
-            <button v-on:click="closeseason(season)">Close</button>
-            <br />
-            <button>Edit</button>
-            <br />
+            <button v-on:click="closeseason(season)" class="btn-default">Close</button>
+            <br/>
+            <button class="btn-default">Edit</button>
+            <br/>
           </td>
         </tr>
         </tbody>
@@ -37,10 +37,10 @@
 </template>
 
 <script>
-  import http from '../util/http'
-
+  import axios from 'axios'
+  import auth from '../../../authentication'
   export default {
-    name: 'Close season',
+    name: 'season-list',
     // data used in template
     data: function () {
       return {
@@ -50,28 +50,32 @@
     },
     // initial data load
     created: function () {
-      http.get(this.$config.API + 'seasons').then(response => {
-        this.seasons = response.data
+      let self = this
+      axios.get(this.$config.API + 'seasons', auth.getAuthHeader()).then(response => {
+        self.seasons = response.data
       }).catch(e => {
         throw e
       })
     },
     // methods used in template
     methods: {
+      showSeason: function (id) {
+        this.$router.push({path: '/panel/seasons/' + id})
+      },
       addseason: function () {
         let self = this
-        http.post(this.$config.API + 'seasons', this.newseason).then(response => {
-          console.log(self.seasons)
-          self.seasons.push(this.newseason)
-          console.log(self.seasons)
+        axios.post(this.$config.API + 'seasons', this.newseason, auth.getAuthHeader()).then(response => {
           self.newseason = {}
+          return axios.get(this.$config.API + 'seasons', auth.getAuthHeader())
+        }).then(response => {
+          self.seasons = response.data
         }).catch(e => {
           throw e
         })
       },
       closeseason: function (season) {
         let self = this
-        http.patch(this.$config.API + 'seasons/' + season.id + '/close').then(response => {
+        axios.patch(this.$config.API + 'seasons/' + season.id + '/close', auth.getAuthHeader()).then(response => {
           console.log(response)
           self.seasons = this.seasons.filter(p => {
             return p !== season
@@ -110,6 +114,8 @@
     align-content: center;
     flex: 1;
     display: flex;
+    width: 100%;
+    height: 100%;
   }
 
   .seasons_form_container__form {

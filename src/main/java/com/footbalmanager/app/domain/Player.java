@@ -1,19 +1,10 @@
 package com.footbalmanager.app.domain;
 
-import java.util.Collection;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.Collection;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -27,35 +18,35 @@ public class Player implements UserDetails {
     private String firstname;
     @Column(name = "last_name", nullable = false)
     private String lastname;
-	@Column(nullable = false)
-	private String username;
+    @Column(nullable = false)
+    private String username;
     @Column(nullable = false)
     private String password;
-	@Column(nullable = false)
-	private String email;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "team_id")
+    @Column(nullable = false)
+    private String email;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "team_id")
     private Team team;
 
     Player() {
     }
 
-	public Player(String firstname, String lastname, String username, String password, String email) {
-		notNull(firstname, "Please provide firstname");
-		notNull(lastname, "Please provide lastname");
-		notNull(username, "Please provide username");
-		notNull(password, "Please provide password");
-		notNull(email, "Please provide email");
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-	}
+    public Player(String firstname, String lastname, String username, String password, String email) {
+        notNull(firstname, "Please provide firstname");
+        notNull(lastname, "Please provide lastname");
+        notNull(username, "Please provide username");
+        notNull(password, "Please provide password");
+        notNull(email, "Please provide email");
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -85,44 +76,44 @@ public class Player implements UserDetails {
         this.team = team;
     }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return false;
-	}
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

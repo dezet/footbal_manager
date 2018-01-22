@@ -1,5 +1,7 @@
 package com.footbalmanager.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +17,12 @@ public class League {
     @Column(name = "name", nullable = false)
     private String name;
     @OneToMany(mappedBy = "league")
+    @JsonIgnore
     private Collection<Team> teams = new ArrayList<>();
     @OneToMany(mappedBy = "league")
+    @JsonIgnore
     private Collection<Match> matches = new ArrayList<>();
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "season_id", nullable = false)
     private Season season;
 

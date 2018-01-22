@@ -2,19 +2,17 @@
   <div class="wrapper">
     <div class="row">
       <div class="panel-sidebar">
-        <panel-menu>
-
-        </panel-menu>
+        <panel-menu></panel-menu>
       </div>
       <div class="panel-main">
         <header>
           <div class="page-title-wrapper">
-            <h1 class="page-title">Tytuł strony</h1>
+            <h1 class="page-title">Zarządzanie sezonami</h1>
           </div>
         </header>
 
         <div class="content" id="content">
-
+          <season-list></season-list>
         </div>
       </div>
 
@@ -24,11 +22,13 @@
 
 <script>
   import PanelMenu from '@/components/admin/PanelMenu'
+  import SeasonList from '@/components/admin/season/SeasonList'
 
   export default {
     name: 'Panel',
     components: {
-      'panel-menu': PanelMenu
+      'panel-menu': PanelMenu,
+      'season-list': SeasonList,
     }
   }
 </script>

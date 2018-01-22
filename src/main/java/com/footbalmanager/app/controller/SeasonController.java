@@ -1,21 +1,18 @@
 package com.footbalmanager.app.controller;
 
+import com.footbalmanager.app.abstraction.BaseController;
+import com.footbalmanager.app.domain.Match;
+import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
+import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
+import com.footbalmanager.app.services.MatchService;
+import com.footbalmanager.app.services.SeasonService;
+import com.footbalmanager.app.services.TimetableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.footbalmanager.app.abstraction.BaseController;
-import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
-import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
-import com.footbalmanager.app.services.SeasonService;
-import com.footbalmanager.app.services.TimetableService;
+import java.util.List;
 
 @RestController
 public class SeasonController extends BaseController {
@@ -23,50 +20,59 @@ public class SeasonController extends BaseController {
     private SeasonService seasonService;
 
     @Autowired
+    private MatchService matchService;
+
+    @Autowired
     private TimetableService timetableService;
 
 
-    @GetMapping("/seasons/{seasonId}/generate")
-    public ResponseEntity<?> generateTimetable(@PathVariable Long seasonId) {
-        timetableService.generate(seasonService.findOne(seasonId));
+    @GetMapping("/seasons/{id}/timetable")
+    public ResponseEntity<?> getTimetable(@PathVariable Long id) {
+        return new ResponseEntity<>((List<Match>) matchService.findBySeason(id), HttpStatus.OK);
+
+    }
+
+    @GetMapping("/seasons/{id}/generate")
+    public ResponseEntity<?> generateTimetable(@PathVariable Long id) {
+        timetableService.generate(seasonService.findOne(id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/seasons")
-	public ResponseEntity<?> getSeasons() {
+    public ResponseEntity<?> getSeasons() {
         return new ResponseEntity<>(seasonService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/seasons/{seasonId}")
-	public ResponseEntity<?> getSeason(@PathVariable Long seasonId) {
-        return new ResponseEntity<>(seasonService.findOne(seasonId), HttpStatus.OK);
+    @GetMapping("/seasons/{id}")
+    public ResponseEntity<?> getSeason(@PathVariable Long id) {
+        return new ResponseEntity<>(seasonService.findOne(id), HttpStatus.OK);
     }
 
     @PostMapping("/seasons")
-	public ResponseEntity<?> saveSeason(@RequestBody PostSeasonRequestDto dto) {
+    public ResponseEntity<?> saveSeason(@RequestBody PostSeasonRequestDto dto) {
         //TODO: obsluga wyjątków
         seasonService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/seasons/{seasonId}")
-    public ResponseEntity<?> updateTeam(@PathVariable Long seasonId, @RequestBody PatchSeasonRequestDto dto) {
+    @PatchMapping("/seasons/{id}")
+    public ResponseEntity<?> updateTeam(@PathVariable Long id, @RequestBody PatchSeasonRequestDto dto) {
         //TODO: obsluga wyjątków
-        seasonService.update(seasonId, dto);
+        seasonService.update(id, dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/seasons/{seasonId}")
-	public ResponseEntity<?> deleteSeason(@PathVariable Long seasonId) {
+    @DeleteMapping("/seasons/{id}")
+    public ResponseEntity<?> deleteSeason(@PathVariable Long id) {
         //TODO: obsluga wyjątków
-        seasonService.delete(seasonId);
+        seasonService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-	@PatchMapping("/seasons/{seasonId}/close")
-	public ResponseEntity<?> closeSeason(@PathVariable Long seasonId) {
-		//TODO: obsluga wyjątków
-		seasonService.close(seasonId);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+    @PatchMapping("/seasons/{id}/close")
+    public ResponseEntity<?> closeSeason(@PathVariable Long id) {
+        //TODO: obsluga wyjątków
+        seasonService.close(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
