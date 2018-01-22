@@ -47,7 +47,7 @@
         }
         auth.login(credentials).then(
           (response) => {
-            this.$router.push('/')
+            this.$router.push('/panel')
           },
 
           (err) => {

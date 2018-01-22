@@ -5,6 +5,8 @@ import com.footbalmanager.app.util.converter.LocalDateTimeAttributeConverter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static org.springframework.util.Assert.notNull;
+
 @Entity
 public class Match {
     @Id
@@ -33,11 +35,11 @@ public class Match {
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "home_team_id", nullable = false)
     private Team home;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "away_team_id", nullable = false)
     private Team away;
 

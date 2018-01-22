@@ -16,6 +16,7 @@ Vue.use(Router)
 
 const router = new Router({
   auth: auth,
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -74,7 +75,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (auth.checkAuth()) {
-      next('/panel')
+      next()
     } else {
       next('/')
     }
