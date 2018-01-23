@@ -9,7 +9,7 @@
     <main>
       <ul>
         <li>
-          <a href="#/panel/seasons">Sezony</a>
+          <a href="/panel/seasons">Sezony</a>
         </li>
         <li>
           <a href="/panel">Ligi</a>

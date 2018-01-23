@@ -28,7 +28,8 @@ public class SeasonController extends BaseController {
 
     @GetMapping("/seasons/{id}/timetable")
     public ResponseEntity<?> getTimetable(@PathVariable Long id) {
-        return new ResponseEntity<>((List<Match>) matchService.findBySeason(id), HttpStatus.OK);
+        List<Match> matches = (List<Match>) matchService.findBySeason(id);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
 
     }
 

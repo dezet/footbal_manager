@@ -1,8 +1,10 @@
 package com.footbalmanager.app.controller;
 
 import com.footbalmanager.app.abstraction.BaseController;
+import com.footbalmanager.app.domain.Match;
 import com.footbalmanager.app.dto.match.PatchMatchRequestDto;
 import com.footbalmanager.app.dto.match.PostMatchRequestDto;
+import com.footbalmanager.app.dto.match.PostUpdateScoreRequestDto;
 import com.footbalmanager.app.services.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,9 @@ public class MatchController extends BaseController {
         return new ResponseEntity<>(matchService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/matches/{matchId}")
-    public ResponseEntity<?> getMatch(@PathVariable Long matchId) {
-        return new ResponseEntity<>(matchService.findOne(matchId), HttpStatus.OK);
+    @GetMapping("/matches/{id}")
+    public ResponseEntity<?> getMatch(@PathVariable Long id) {
+        return new ResponseEntity<>(matchService.findOne(id), HttpStatus.OK);
     }
 
     @PostMapping("/matches")
@@ -31,17 +33,26 @@ public class MatchController extends BaseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/matches/{matchId}")
-    public ResponseEntity<?> updateTeam(@PathVariable Long matchId, @RequestBody PatchMatchRequestDto dto) {
+    @PatchMapping("/matches/{id}")
+    public ResponseEntity<?> updateMatch(@PathVariable Long id, @RequestBody PatchMatchRequestDto dto) {
         //TODO: obsluga wyjątków
-        matchService.update(matchId, dto);
+        matchService.update(id, dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/matches/{matchId}")
-    public ResponseEntity<?> deleteTeam(@PathVariable Long matchId) {
+    @DeleteMapping("/matches/{id}")
+    public ResponseEntity<?> deleteMatch(@PathVariable Long id) {
         //TODO: obsluga wyjątków
-        matchService.delete(matchId);
+        matchService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("matches/{id}/score")
+    public ResponseEntity<?> updateScore(@PathVariable Long id, @RequestBody PostUpdateScoreRequestDto dto) {
+        Match updatedMatch = matchService.findOne(id);
+        updatedMatch.setAwayScore(dto.getAwayScore());
+        updatedMatch.setHomeScore(dto.getHomeScore());
+        Match m = matchService.save(updatedMatch);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

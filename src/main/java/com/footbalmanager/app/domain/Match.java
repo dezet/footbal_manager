@@ -1,6 +1,9 @@
 package com.footbalmanager.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.footbalmanager.app.util.converter.LocalDateTimeAttributeConverter;
+import org.springframework.data.convert.Jsr310Converters;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,10 +26,10 @@ public class Match {
     private LocalDateTime date;
 
     @Column(name = "home_score", nullable = false)
-    private Integer homeScore = 0;
+    private Integer homeScore;
 
     @Column(name = "away_score", nullable = false)
-    private Integer awayScore = 0;
+    private Integer awayScore;
 
     @Column(name = "played", nullable = false)
     private Boolean played = false;
