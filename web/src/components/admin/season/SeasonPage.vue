@@ -141,7 +141,7 @@
               played: elem.played
             }
           })
-          console.log(self.data)
+
         }).catch(e => {
           throw e
         })
