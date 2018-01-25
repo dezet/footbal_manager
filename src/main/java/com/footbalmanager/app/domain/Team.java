@@ -23,8 +23,10 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private Collection<Player> players = new ArrayList<>();
     @OneToMany(mappedBy = "home")
+    @JsonIgnore
     private Collection<Match> homeMatches = new ArrayList<>();
     @OneToMany(mappedBy = "away")
+    @JsonIgnore
     private Collection<Match> awayMatches = new ArrayList<>();
 
     Team() {

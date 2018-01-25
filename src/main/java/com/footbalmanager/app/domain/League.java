@@ -28,9 +28,11 @@ public class League {
     private String name;
     @JsonIgnore
     @OneToMany(mappedBy = "league")
+    @JsonIgnore
     private Collection<Team> teams = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "league")
+    @JsonIgnore
     private Collection<Match> matches = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "season_id", nullable = false)

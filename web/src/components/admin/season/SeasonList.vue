@@ -11,11 +11,11 @@
         </tr>
         </thead>
         <tbody name="table-row">
-        <tr v-for="season in seasons" :key="season.id" v-on:click="showSeason(season.id)">
+        <tr v-for="season in seasons" :key="season.id">
           <td :key="season.id">
-          <td>{{season.name}}</td>
-          <td>{{season.year}}</td>
-          <td>{{season.open}}</td>
+          <td v-on:click="showSeason(season.id)">{{season.name}}</td>
+          <td v-on:click="showSeason(season.id)">{{season.year}}</td>
+          <td v-on:click="showSeason(season.id)">{{season.open}}</td>
           <td>
             <button v-on:click="closeseason(season)" class="btn-default">Close</button>
             <br/>
@@ -39,6 +39,7 @@
 <script>
   import axios from 'axios'
   import auth from '../../../authentication'
+
   export default {
     name: 'season-list',
     // data used in template
@@ -75,7 +76,7 @@
       },
       closeseason: function (season) {
         let self = this
-        axios.patch(this.$config.API + 'seasons/' + season.id + '/close', auth.getAuthHeader()).then(response => {
+        axios.post(this.$config.API + 'seasons/' + season.id + '/close', auth.getAuthHeader()).then(response => {
           console.log(response)
           self.seasons = this.seasons.filter(p => {
             return p !== season

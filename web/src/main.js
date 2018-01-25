@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
+import Datatable from 'vue2-datatable-component'
 
 Vue.config.productionTip = false
 
@@ -16,6 +17,7 @@ const configs = {
 Vue.use(vueConfig, configs)
 Vue.use(Vuex)
 Vue.use(VeeValidate)
+Vue.use(Datatable)
 
 /* eslint-disable no-new */
 new Vue({
