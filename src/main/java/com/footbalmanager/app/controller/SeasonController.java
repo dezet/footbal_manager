@@ -69,7 +69,7 @@ public class SeasonController extends BaseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/seasons/{id}/close")
+    @PostMapping("/seasons/{id}/close")
     public ResponseEntity<?> closeSeason(@PathVariable Long id) {
         //TODO: obsluga wyjątków
         seasonService.close(id);
