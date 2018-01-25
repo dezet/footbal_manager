@@ -8,6 +8,9 @@ import Signup from '@/components/authentication/Signup'
 
 import SeasonsPage from '@/components/admin/season/SeasonsPage'
 import SeasonPage from '@/components/admin/season/SeasonPage'
+import LeaguePage from '@/components/admin/leagues/LeaguePage'
+import LeagueList from '@/components/admin/leagues/LeagueList'
+import GenerateTimetable from '@/components/GenerateTimetable'
 
 import auth from '../authentication'
 
@@ -39,6 +42,12 @@ const router = new Router({
       path: '/panel/seasons/:id',
       name: 'SeasonPage',
       component: SeasonPage,
+      meta: {requiresAuth: false}
+    },
+    {
+      path: '/panel/leagues',
+      name: 'LeaguePage',
+      component: LeaguePage,
       meta: {requiresAuth: false}
     },
     {

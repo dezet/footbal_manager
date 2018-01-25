@@ -12,7 +12,7 @@
           <a href="/panel/seasons">Sezony</a>
         </li>
         <li>
-          <a href="/panel">Ligi</a>
+          <a href="/panel/leagues">Ligi</a>
         </li>
         <li>
           <a href="/panel">Zespoły</a>

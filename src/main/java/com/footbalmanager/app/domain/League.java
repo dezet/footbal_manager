@@ -26,13 +26,15 @@ public class League {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
+    @JsonIgnore
     @OneToMany(mappedBy = "league")
     @JsonIgnore
     private Collection<Team> teams = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "league")
     @JsonIgnore
     private Collection<Match> matches = new ArrayList<>();
-	@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "season_id", nullable = false)
     private Season season;
 
