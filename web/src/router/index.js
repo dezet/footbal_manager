@@ -5,10 +5,9 @@ import Panel from '@/components/admin/Panel'
 import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
-import AddPlayers from '@/components/AddPlayers'
+
 import SeasonsPage from '@/components/admin/season/SeasonsPage'
 import SeasonPage from '@/components/admin/season/SeasonPage'
-import GenerateTimetable from '@/components/GenerateTimetable'
 
 import auth from '../authentication'
 
@@ -46,18 +45,6 @@ const router = new Router({
       path: '/players',
       name: 'Players',
       component: Players,
-      meta: {requiresAuth: true}
-    },
-    {
-      path: '/timetable',
-      name: 'Timetable',
-      component: GenerateTimetable,
-      meta: {requiresAuth: true}
-    },
-    {
-      path: '/newplayer',
-      name: 'new players',
-      component: AddPlayers,
       meta: {requiresAuth: true}
     },
     {
