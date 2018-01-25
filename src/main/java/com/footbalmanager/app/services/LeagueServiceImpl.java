@@ -47,7 +47,8 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public void save(PostLeagueRequestDto dto) {
-        //TODO: dto -> entity i save, nie piszę póki nie znamy pól
+        League league = new League(dto.getName(), dto.getSeason());
+        leagueRepository.save(league);
     }
 
     @Override

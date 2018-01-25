@@ -1,21 +1,25 @@
 package com.footbalmanager.app.dto.league;
 
-import java.util.List;
+import com.footbalmanager.app.domain.Season;
 
 public class PostLeagueRequestDto {
     private String name;
-    private List<Integer> teams;
+    private Season season;
 
-    public PostLeagueRequestDto(String name, List<Integer> teams) {
+    public PostLeagueRequestDto() {
+
+    }
+
+    public PostLeagueRequestDto(String name, Season season) {
         this.name = name;
-        this.teams = teams;
+        this.season = season;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Integer> getTeams() {
-        return teams;
+    public Season getSeason() {
+        return season;
     }
 }
