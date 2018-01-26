@@ -19,9 +19,6 @@
           <li>
             <a href="#creators">Twórcy</a>
           </li>
-          <li>
-            <a href="#contact">Kontakt</a>
-          </li>
         </ul>
 
         <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="!userLogged()"
@@ -32,6 +29,9 @@
         </button>
         <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-if="!userLogged()"
                 v-on:click="onSingUpClicked">Rejestracja
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+                v-on:click="onPanelClicked">Panel
         </button>
       </div>
     </div>
@@ -67,6 +67,9 @@
       },
       onSingUpClicked () {
         this.$router.push({path: '/signup'})
+      },
+      onPanelClicked () {
+        this.$router.push({path: '/panel'})
       },
       userLogged () {
         return auth.checkAuth()
