@@ -1,12 +1,16 @@
 package com.footbalmanager.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 import static org.springframework.util.Assert.notNull;
 
 @Entity
-public class Player {
+public class Player implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -15,18 +19,31 @@ public class Player {
     private String firstname;
     @Column(name = "last_name", nullable = false)
     private String lastname;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String email;
+    @ManyToOne
     @JoinColumn(name = "team_id")
+    @JsonIgnore
     private Team team;
 
     Player() {
     }
 
-    public Player(String firstname, String lastname) {
+    public Player(String firstname, String lastname, String username, String password, String email) {
         notNull(firstname, "Please provide firstname");
         notNull(lastname, "Please provide lastname");
+        notNull(username, "Please provide username");
+        notNull(password, "Please provide password");
+        notNull(email, "Please provide email");
         this.firstname = firstname;
         this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -59,5 +76,46 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

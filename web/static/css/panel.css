@@ -1,0 +1,100 @@
+/**, *::before, *::after {
+  box-sizing: border-box;
+  clear: both;
+}*/
+
+.wrapper {
+  max-width: 100vw;
+}
+
+.row {
+  margin: 0;
+}
+
+.panel-sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: #292929;
+  color: #ffffff;
+  /*border: 1px solid #f6e502;*/
+  align-items: center;
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  clear: both;
+}
+
+.panel-sidebar nav {
+  width: 100%;
+}
+
+.panel-sidebar nav header .ball {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.panel-sidebar nav header h3 {
+  text-align: center;
+}
+
+.panel-sidebar nav main ul {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 80%;
+  text-align: center;
+}
+
+.panel-sidebar nav main li {
+  display: block;
+  background-color: #828282;
+  margin: 0.8em;
+  font-size: 1.2em;
+  padding: 0.3em;
+}
+
+.panel-sidebar nav main li a {
+  text-decoration: none;
+  color: white;
+}
+
+.panel-main {
+  margin-left: 280px;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f6f6f6;
+  /*border: 1px solid #f6e502;*/
+  padding: 10px;
+  clear: both;
+}
+
+.panel-main>header {
+  display: flex;
+  align-items: center;
+}
+
+.page-title-wrapper {
+  width: 100%;
+}
+
+.page-add-button-wrapper {
+  width: 100%;
+  text-align: right;
+}
+
+.page-title {
+  padding: 1em;
+  /*border: 1px solid #f6e502;*/
+}
+
+.page-add-button {
+  padding: 1em;
+  margin: 1em;
+  color: #ffffff;
+}
+
+.panel-main .table {
+
+}

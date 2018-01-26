@@ -1,6 +1,9 @@
 package com.footbalmanager.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.footbalmanager.app.util.converter.LocalDateTimeAttributeConverter;
+import org.springframework.data.convert.Jsr310Converters;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,23 +26,23 @@ public class Match {
     private LocalDateTime date;
 
     @Column(name = "home_score", nullable = false)
-    private Integer homeScore = 0;
+    private Integer homeScore;
 
     @Column(name = "away_score", nullable = false)
-    private Integer awayScore = 0;
+    private Integer awayScore;
 
     @Column(name = "played", nullable = false)
     private Boolean played = false;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "home_team_id", nullable = false)
     private Team home;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "away_team_id", nullable = false)
     private Team away;
 
@@ -47,13 +50,13 @@ public class Match {
     }
 
     public Match(Team home, Team away, LocalDateTime date, Integer homeScore, Integer awayScore, Boolean played, League league) {
-        notNull(home, "Please provide home team");
-        notNull(away, "Please provide away team");
-        notNull(date, "Please provide date");
-        notNull(homeScore, "Please provide home score");
-        notNull(awayScore, "Please provide away score");
-        notNull(played, "Please if match was played");
-        notNull(league, "Please provide league");
+//        notNull(home, "Please provide home team");
+//        notNull(away, "Please provide away team");
+//        notNull(date, "Please provide date");
+//        notNull(homeScore, "Please provide home score");
+//        notNull(awayScore, "Please provide away score");
+//        notNull(played, "Please if match was played");
+//        notNull(league, "Please provide league");
         this.home = home;
         this.away = away;
         this.date = date;
