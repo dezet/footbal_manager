@@ -109,5 +109,5 @@ section {
 
 #footer {
   background-color: #080808;
-  height: 50vh;
+  height: fit-content;
 }
