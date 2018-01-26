@@ -26,7 +26,6 @@ public class TeamController extends BaseController {
 
     @PostMapping("/teams")
     public ResponseEntity<?> saveTeam(@RequestBody PostTeamRequestDto dto) {
-        //TODO: obsluga wyjątków
         teamService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

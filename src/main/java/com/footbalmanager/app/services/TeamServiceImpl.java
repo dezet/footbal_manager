@@ -51,7 +51,8 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void save(PostTeamRequestDto dto) {
-        //TODO: dto -> entity i save, nie piszę póki nie znamy pól wszystkich
+        Team team = new Team(dto.getName(), dto.getLeague());
+        teamRepository.save(team);
     }
 
     @Override

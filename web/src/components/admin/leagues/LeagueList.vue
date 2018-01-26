@@ -7,6 +7,7 @@
           <th>#</th>
           <th>Name</th>
           <th>Season</th>
+          <th></th>
         </tr>
         </thead>
         <tbody name="table-row">
@@ -16,7 +17,6 @@
           <td>{{league.season.name}}</td>
           <td>
             <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-            <br/>
           </td>
         </tr>
         </tbody>
