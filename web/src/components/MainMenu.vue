@@ -24,13 +24,13 @@
         <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="!userLogged()"
                 v-on:click="onLoginClicked">Logowanie
         </button>
-        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+        <button class="btn btn-danger navbar-btn navbar-right nav-btn" v-if="userLogged()"
                 v-on:click="onLogoutClicked">Wyloguj
         </button>
         <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-if="!userLogged()"
                 v-on:click="onSingUpClicked">Rejestracja
         </button>
-        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+        <button class="btn btn-default navbar-btn navbar-right nav-btn" v-if="userLogged()"
                 v-on:click="onPanelClicked">Panel
         </button>
       </div>
