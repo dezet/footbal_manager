@@ -32,9 +32,9 @@
           </div>
 
           <div class="form-group">
-            <label for="lastName">Nazwa użytkownika: </label>
+            <label for="username">Nazwa użytkownika: </label>
             <input
-              id="login"
+              id="username"
               type="text"
               class="form-control"
               placeholder="Podaj nazwę użytkownika"
