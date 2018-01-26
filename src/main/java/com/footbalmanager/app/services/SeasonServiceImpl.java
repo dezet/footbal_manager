@@ -1,15 +1,19 @@
 package com.footbalmanager.app.services;
 
-import com.footbalmanager.app.domain.Match;
-import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
-import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
-import com.footbalmanager.app.repository.SeasonRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.footbalmanager.app.domain.Match;
+import com.footbalmanager.app.domain.Season;
+import com.footbalmanager.app.dto.season.PatchSeasonRequestDto;
+import com.footbalmanager.app.dto.season.PostSeasonRequestDto;
+import com.footbalmanager.app.dto.season.SeasonRapportDto;
+import com.footbalmanager.app.repository.MatchRepository;
+import com.footbalmanager.app.repository.SeasonRepository;
 
 @Service("seasonService")
 @Transactional
@@ -19,7 +23,7 @@ public class SeasonServiceImpl implements SeasonService {
     private SeasonRepository seasonRepository;
 
     @Autowired
-    private MatchService matchService;
+	private MatchRepository matchRepository;
 
     @Override
     public void update(Long id, PatchSeasonRequestDto dto) {
@@ -65,7 +69,28 @@ public class SeasonServiceImpl implements SeasonService {
         seasonRepository.save(season);
     }
 
-    @Override
+	@Override
+	public SeasonRapportDto getRapport(Long id) {
+		Iterable<Match> matchesIterable = matchRepository.findBySeason(id);
+		List<Match> matches = new ArrayList<>();
+		matchesIterable.forEach(matches::add);
+		SeasonRapportDto seasonRapportDto = new SeasonRapportDto();
+		seasonRapportDto.setAwayGoals(matches.stream().mapToInt(Match::getAwayScore).sum());
+		seasonRapportDto.setHomeGoals(matches.stream().mapToInt(Match::getHomeScore).sum());
+		seasonRapportDto.setAwayLoses(
+				(int) matches.stream().filter(match -> match.getAwayScore() < match.getHomeScore()).count());
+		seasonRapportDto.setAwayWins(
+				(int) matches.stream().filter(match -> match.getAwayScore() > match.getHomeScore()).count());
+		seasonRapportDto.setHomeWins(
+				(int) matches.stream().filter(match -> match.getHomeScore() > match.getAwayScore()).count());
+		seasonRapportDto.setHomeLosses(
+				(int) matches.stream().filter(match -> match.getHomeScore() < match.getAwayScore()).count());
+		seasonRapportDto
+				.setDraws((int) matches.stream().filter(match -> match.getHomeScore() == match.getAwayScore()).count());
+		return seasonRapportDto;
+	}
+
+	@Override
     public Iterable<Season> save(Iterable<Season> entities) {
         return seasonRepository.save(entities);
     }

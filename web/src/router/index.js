@@ -5,12 +5,11 @@ import Panel from '@/components/admin/Panel'
 import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
-
 import SeasonsPage from '@/components/admin/season/SeasonsPage'
+import SeasonRapport from '@/components/admin/season/SeasonRapport'
 import SeasonPage from '@/components/admin/season/SeasonPage'
 import LeaguePage from '@/components/admin/leagues/LeaguePage'
 import TeamPage from '@/components/admin/teams/TeamPage'
-//import GenerateTimetable from '@/components/GenerateTimetable'
 
 import auth from '../authentication'
 
@@ -42,6 +41,12 @@ const router = new Router({
       path: '/panel/seasons/:id',
       name: 'SeasonPage',
       component: SeasonPage,
+      meta: {requiresAuth: false}
+    },
+    {
+      path: '/panel/seasons/:id/rapport',
+      name: 'SeasonRapport',
+      component: SeasonRapport,
       meta: {requiresAuth: false}
     },
     {

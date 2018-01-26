@@ -5,22 +5,20 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
-          <th>Year</th>
-          <th>Open</th>
+          <th>Nazwa</th>
+          <th>Rok</th>
+          <th>Otwarty</th>
         </tr>
         </thead>
         <tbody name="table-row">
         <tr v-for="season in seasons" :key="season.id">
           <td :key="season.id">
-          <td v-on:click="showSeason(season.id)">{{season.name}}</td>
-          <td v-on:click="showSeason(season.id)">{{season.year}}</td>
-          <td v-on:click="showSeason(season.id)">{{season.open}}</td>
+          <td v-on:click="showSeason(season)">{{season.name}}</td>
+          <td v-on:click="showSeason(season)">{{season.year}}</td>
+          <td v-on:click="showSeason(season)">{{season.open ? 'tak' : 'nie'}}</td>
           <td>
-            <button v-on:click="closeseason(season)" class="btn-default">Close</button>
-            <br/>
-            <button class="btn-default">Edit</button>
-            <br/>
+            <button v-if="season.open" v-on:click="closeseason(season.id)" class="btn btn-danger">Zamknij</button>
+            <button v-if="!season.open" v-on:click="showRapport(season.id)" class="btn btn-info">Raport</button>
           </td>
         </tr>
         </tbody>
@@ -28,9 +26,9 @@
     </div>
     <div class="seasons_form_container">
       <form id="form" v-on:submit.prevent="addseason" class="seasons_form_container__form">
-        <input type="text" v-model="newseason.name" placeholder="Name">
-        <input type="number" v-model="newseason.year" placeholder="Year">
-        <input type="submit" value="Save">
+        <input type="text" v-model="newseason.name" placeholder="Nazwa">
+        <input type="number" v-model="newseason.year" placeholder="Rok">
+        <input type="submit" value="Zapisz">
       </form>
     </div>
   </div>
@@ -60,8 +58,10 @@
     },
     // methods used in template
     methods: {
-      showSeason: function (id) {
-        this.$router.push({path: '/panel/seasons/' + id})
+      showSeason: function (season) {
+        if (season.open) {
+          this.$router.push({path: '/panel/seasons/' + season.id})
+        }
       },
       addseason: function () {
         let self = this
@@ -74,14 +74,18 @@
           throw e
         })
       },
-      closeseason: function (season) {
+      closeseason: function (id) {
         let self = this
-        axios.post(this.$config.API + 'seasons/' + season.id + '/close', auth.getAuthHeader()).then(response => {
-          console.log(response)
-          self.seasons = this.seasons.filter(p => {
-            return p !== season
-          })
+        axios.patch(this.$config.API + '/seasons/' + id + '/close', '', auth.getAuthHeader()).then(response => {
+          return axios.get(this.$config.API + 'seasons', auth.getAuthHeader())
+        }).then(response => {
+          self.seasons = response.data
+        }).catch(e => {
+          throw e
         })
+      },
+      showRapport: function (id) {
+        this.$router.push({path: '/panel/seasons/' + id + '/rapport'})
       }
     }
   }
