@@ -9,7 +9,7 @@
       <div class="panel-main">
         <header>
           <div class="page-title-wrapper">
-            <h1 class="page-title">Tytuł strony</h1>
+            <h1 class="page-title">Panel Football Manager</h1>
           </div>
         </header>
 
