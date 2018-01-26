@@ -1,45 +1,73 @@
 <template>
-  <div class="col-sm-4 col-sm-offset-4">
-    <h2>Sing Up</h2>
-    <div class="alert alert-danger" v-if="error">
-      <p>{{ error }}</p>
+  <div class="wrapper">
+    <div class="container">
+      <div class="signup-form">
+        <h1>Rejestracja</h1>
+
+        <div class="alert alert-danger" v-if="error">
+          <p>{{ error }}</p>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <label for="firstName">Imię: </label>
+            <input
+              id="firstName"
+              type="text"
+              class="form-control"
+              placeholder="Podaj imię"
+              v-model="credentials.firstname"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Nazwisko: </label>
+            <input
+              id="lastName"
+              type="text"
+              class="form-control"
+              placeholder="Podaj nazwisko"
+              v-model="credentials.lastname"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="username">Nazwa użytkownika: </label>
+            <input
+              id="username"
+              type="text"
+              class="form-control"
+              placeholder="Podaj nazwę użytkownika"
+              v-model="credentials.username"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Adres email: </label>
+            <input
+              id="email"
+              type="text"
+              class="form-control"
+              placeholder="Podaj adres email"
+              v-model="credentials.email"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Hasło: </label>
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              placeholder="Podaj hasło"
+              v-model="credentials.password"
+            >
+          </div>
+
+          <button class="btn btn-primary" @click="submit()">Zarejestruj się</button>
+        </form>
+      </div>
     </div>
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter your firstname"
-        v-model="credentials.firstname"
-      >
-    </div>
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter your lastname"
-        v-model="credentials.lastname"
-      >
-    </div>
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter your username"
-        v-model="credentials.username"
-      >
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Enter your email address" v-model="credentials.email">
-    </div>
-    <div class="form-group">
-      <input
-        type="password"
-        class="form-control"
-        placeholder="Enter your password"
-        v-model="credentials.password"
-      >
-    </div>
-    <button class="btn btn-primary" @click="submit()">Access</button>
   </div>
 </template>
 
@@ -81,6 +109,27 @@
           })
       }
     }
-
   }
 </script>
+
+<style scoped>
+  .wrapper {
+    height: 100vh;
+  }
+
+  .wrapper .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .signup-form {
+    width: 100%;
+  }
+
+  .signup-form h1 {
+    text-align: center;
+  }
+</style>
