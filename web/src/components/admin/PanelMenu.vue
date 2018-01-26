@@ -15,7 +15,7 @@
           <a href="/panel/leagues">Ligi</a>
         </li>
         <li>
-          <a href="/panel">Zespoły</a>
+          <a href="/panel/teams">Zespoły</a>
         </li>
         <li>
           <a href="/panel">Mecze</a>
