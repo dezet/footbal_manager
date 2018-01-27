@@ -21,8 +21,6 @@
         </div>
       </div>
     </div>
-    <modal v-if="showModal" @closeModal="closeModal()" @updateMatch="updateMatch()" v-on:show="showModal = true">
-    </modal>
   </div>
 </template>
 <script>
@@ -146,37 +144,6 @@
           throw e
         })
       },
-      closeModal: function () {
-        this.showModal = false
-      },
-      updateMatch: function () {
-        let params = {
-          id: this.current,
-          homeScore: $('input#home').val(),
-          awayScore: $('input#away').val()
-        }
-        axios.post(this.$config.API + 'matches/' + params.id + '/score', params,
-          auth.getAuthHeader()).then(response => {
-          this.showModal = false
-          return axios.get(this.$config.API + 'seasons/' + this.$route.params.id + '/timetable',
-            auth.getAuthHeader())
-        }).then(response => {
-          self.data = response.data.map(elem => {
-            return {
-              id: elem.id,
-              league: elem.league.name,
-              home: elem.home.name,
-              away: elem.away.name,
-              date: elem.date,
-              homeScore: elem.homeScore,
-              awayScore: elem.awayScore,
-              played: elem.played
-            }
-          })
-        }).catch(e => {
-          throw e
-        })
-      }
     },
     components: {
       'panel-menu': PanelMenu,
