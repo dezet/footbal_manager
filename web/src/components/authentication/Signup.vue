@@ -8,7 +8,7 @@
           <p>{{ error }}</p>
         </div>
 
-        <form>
+        <form @keyup.enter="submit()">
           <div class="form-group">
             <label for="firstName">Imię: </label>
             <input
@@ -63,9 +63,8 @@
               v-model="credentials.password"
             >
           </div>
-
-          <button class="btn btn-primary" @click="submit()">Zarejestruj się</button>
         </form>
+        <button class="btn btn-primary" @click="submit()">Zarejestruj się</button>
       </div>
     </div>
   </div>
