@@ -9,7 +9,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.footbalmanager.app.domain.Player;
-import com.footbalmanager.app.repository.PlayerRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -30,9 +28,6 @@ import static com.footbalmanager.app.configuration.security.SecurityConstants.SE
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
-
-	@Autowired
-	private PlayerRepository playerRepository;
 
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
@@ -66,7 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
 				.compact();
-		res.addHeader("Access-Control-Expose-Headers", "access_token");
+		res.addHeader("Access-Control-Expose-Headers", "access_token, is_admin");
 		res.addHeader("access_token", token);
 
 		if (Objects.equals(((User) auth.getPrincipal()).getUsername(), ADMIN_USER)) {
