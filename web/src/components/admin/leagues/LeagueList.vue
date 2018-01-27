@@ -1,6 +1,7 @@
 <template>
   <div class="leagues">
-    <button class="btn btn-success" v-on:click="showModal = true"><i class="fa fa-pencil" aria-hidden="true"></i>
+    <button class="btn btn-success" v-if="idAdmin" v-on:click="showModal = true"><i class="fa fa-pencil"
+                                                                                    aria-hidden="true"></i>
       Dodaj ligę
     </button>
     <modal v-if="showModal" :seasons="seasons" @closeModal="closeModal()" @addLeague="addLeague()"
@@ -21,7 +22,7 @@
           <td>{{league.name}}</td>
           <td>{{league.season.name}}</td>
           <td>
-            <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+            <button v-if="idAdmin" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
           </td>
         </tr>
         </tbody>
@@ -89,6 +90,9 @@
         }).catch(e => {
           throw e
         })
+      },
+      isAdmin: function () {
+        return auth.isAdmin()
       }
     }
   }

@@ -20,18 +20,30 @@
             <a href="#creators">Twórcy</a>
           </li>
         </ul>
-
         <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="!userLogged()"
                 v-on:click="onLoginClicked">Logowanie
         </button>
-        <button class="btn btn-danger navbar-btn navbar-right nav-btn" v-if="userLogged()"
-                v-on:click="onLogoutClicked">Wyloguj
+        <button class="btn btn-danger navbar-btn navbar-right nav-btn" v-if="userLogged()" v-on:click="onLogoutClicked">
+          Wyloguj
         </button>
         <button class="btn btn-primary navbar-btn navbar-right nav-btn" v-if="!userLogged()"
                 v-on:click="onSingUpClicked">Rejestracja
         </button>
-        <button class="btn btn-default navbar-btn navbar-right nav-btn" v-if="userLogged()"
-                v-on:click="onPanelClicked">Panel
+        <button class="btn btn-default navbar-btn navbar-right nav-btn" v-if="userLogged() && isAdmin()"
+                v-on:click="onPanelClicked">
+          Panel
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+                v-on:click="onLeaguesClicked">Liga
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+                v-on:click="onMatchesClicked">Mecze
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()"
+                v-on:click="onSeasonsClicked">Sezony
+        </button>
+        <button class="btn btn-success navbar-btn navbar-right nav-btn" v-if="userLogged()" v-on:click="onTeamsClicked">
+          Drużyny
         </button>
       </div>
     </div>
@@ -73,6 +85,21 @@
       },
       userLogged () {
         return auth.checkAuth()
+      },
+      onLeaguesClicked () {
+        this.$router.push({path: '/leagues'})
+      },
+      onMatchesClicked () {
+        this.$router.push({path: '/matches'})
+      },
+      onSeasonsClicked () {
+        this.$router.push({path: '/seasons'})
+      },
+      onTeamsClicked () {
+        this.$router.push({path: '/teams'})
+      },
+      isAdmin () {
+        return auth.isAdmin()
       }
     },
     created () {

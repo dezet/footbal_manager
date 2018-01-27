@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.footbalmanager.app.domain.League;
@@ -30,6 +31,9 @@ public class TestDataLoaderService {
 	private PlayerRepository playerRepository;
 
 	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
 	private TimetableService timetableService;
 
 	@Autowired
@@ -40,6 +44,9 @@ public class TestDataLoaderService {
 
 	@PostConstruct
 	public void init() {
+		Player admin = new Player("admin", "admin", "admin", "admin", "admin");
+		admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+		playerRepository.save(admin);
 		List<Season> seasons = createTestSeasons();
 		List<League> leagues = createTestLeagues(seasons);
 		List<Team> teams = createTestTeams(leagues);

@@ -16,7 +16,8 @@
           <td>{{match.home.name}}</td>
           <td>{{match.away.name}}</td>
           <td>
-            <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+            <button v-if="isAdmin()" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
+            </button>
           </td>
         </tr>
         </tbody>
@@ -50,6 +51,9 @@
     methods: {
       showMatch: function(id){
         this.$router.push('/panel/matches/'+id);
+      },
+      isAdmin: function () {
+        return auth.isAdmin()
       }
     }
   }

@@ -1,6 +1,7 @@
 <template>
   <div class="seasons">
-    <button class="btn btn-success" v-on:click="showModal = true"><i class="fa fa-pencil" aria-hidden="true"></i>
+    <button v-if="isAdmin()" class="btn btn-success" v-on:click="showModal = true"><i class="fa fa-pencil"
+                                                                                      aria-hidden="true"></i>
       Dodaj sezon
     </button>
     <modal v-if="showModal" :seasons="seasons" @closeModal="closeModal()" @addSeason="addseason()"
@@ -22,8 +23,10 @@
           <td v-on:click="showSeason(season)">{{season.year}}</td>
           <td v-on:click="showSeason(season)">{{season.open ? 'tak' : 'nie'}}</td>
           <td>
-            <button v-if="season.open" v-on:click="closeseason(season.id)" class="btn btn-danger">Zamknij</button>
-            <button v-if="!season.open" v-on:click="showRapport(season.id)" class="btn btn-info">Raport</button>
+            <button v-if="season.open && isAdmin()" v-on:click="closeseason(season.id)" class="btn btn-danger">Zamknij
+            </button>
+            <button v-if="!season.open && isAdmin()" v-on:click="showRapport(season.id)" class="btn btn-info">Raport
+            </button>
           </td>
         </tr>
         </tbody>
@@ -62,7 +65,7 @@
     // methods used in template
     methods: {
       showSeason: function (season) {
-        if (season.open) {
+        if (season.open && auth.isAdmin()) {
           this.$router.push({path: '/panel/seasons/' + season.id})
         }
       },
@@ -98,6 +101,9 @@
       },
       showRapport: function (id) {
         this.$router.push({path: '/panel/seasons/' + id + '/rapport'})
+      },
+      isAdmin: function () {
+        return auth.isAdmin()
       }
     }
   }

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Panel from '@/components/admin/Panel'
-import Players from '@/components/Players'
 import Login from '@/components/authentication/Login'
 import Signup from '@/components/authentication/Signup'
 import SeasonsPage from '@/components/admin/season/SeasonsPage'
@@ -12,6 +11,11 @@ import LeaguePage from '@/components/admin/leagues/LeaguePage'
 import TeamPage from '@/components/admin/teams/TeamPage'
 import MatchPage from '@/components/admin/matches/MatchPage'
 import MatchesPage from '@/components/admin/matches/MatchesPage'
+
+import Leagues from '@/components/player/Leagues'
+import Matches from '@/components/player/Matches'
+import Seasons from '@/components/player/Seasons'
+import Teams from '@/components/player/Teams'
 import auth from '../authentication'
 
 Vue.use(Router)
@@ -24,78 +28,100 @@ const router = new Router({
       path: '/',
       name: 'Main',
       component: Main,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: false}
     },
     {
       path: '/panel',
       name: 'Panel',
       component: Panel,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/seasons',
       name: 'SeasonsPage',
       component: SeasonsPage,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/seasons/:id',
       name: 'SeasonPage',
       component: SeasonPage,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/seasons/:id/rapport',
       name: 'SeasonRapport',
       component: SeasonRapport,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/matches/:id',
       name: 'MatchPage',
       component: MatchPage,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/matches',
       name: 'MatchesPage',
       component: MatchesPage,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/leagues',
       name: 'LeaguePage',
       component: LeaguePage,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
       path: '/panel/teams',
       name: 'TeamPage',
       component: TeamPage,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: true}
     },
     {
-      path: '/players',
-      name: 'Players',
-      component: Players,
-      meta: {requiresAuth: true}
+      path: '/leagues',
+      component: Leagues,
+      meta: {requiresAuth: false, requiresAdmin: false}
+    },
+    {
+      path: '/matches',
+      component: Matches,
+      meta: {requiresAuth: false, requiresAdmin: false}
+    },
+    {
+      path: '/seasons',
+      component: Seasons,
+      meta: {requiresAuth: false, requiresAdmin: false}
+    },
+    {
+      path: '/teams',
+      component: Teams,
+      meta: {requiresAuth: false, requiresAdmin: false}
     },
     {
       path: '/login',
       component: Login,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: false}
     },
     {
       path: '/signup',
       component: Signup,
-      meta: {requiresAuth: false}
+      meta: {requiresAuth: false, requiresAdmin: false}
     }
   ]
 })
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (auth.checkAuth()) {
-      next()
+      if (to.meta.requiresAdmin) {
+        if (auth.isAdmin()) {
+          next()
+        } else {
+          next('/')
+        }
+      } else {
+        next()
+      }
     } else {
       next('/')
     }
