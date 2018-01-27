@@ -10,21 +10,13 @@
             <h1 class="page-title">Informacje o sezonie</h1>
           </div>
         </header>
-
         <div class="content" id="content">
-          {{season.id}}
-          {{season.name}}
-          {{season.year}}
-          {{season.open}}
-          <button v-on:click="generateTimetable(season)" class="btn-success">Generuj timetable</button>
-          <br>
           <div>
-            <div>
-              <code>query: {{ query }}</code>
-              <datatable v-bind="$data">
-              </datatable>
-            </div>
-
+            <button v-on:click="generateTimetable(season)" class="btn-success">Generuj terminarz meczów</button>
+          </div>
+          <div class="matches">
+            <datatable v-bind="$data">
+            </datatable>
           </div>
         </div>
       </div>
@@ -40,46 +32,54 @@
   import auth from '../../../authentication'
 
   export default {
-    name: 'Panel',
+    name: 'season-page',
     data: () => ({
       columns: [
         {
           title: 'id',
           field: 'id',
-          tdClass: 'id-tag'
+          tdClass: 'id-tag',
+          sortable: true
         },
         {
           title: 'League',
-          field: 'league'
+          field: 'league',
+          sortable: true
         },
         {
           title: 'Home',
-          field: 'home'
+          field: 'home',
+          sortable: true
         },
         {
           title: 'Away',
-          field: 'away'
+          field: 'away',
+          sortable: true
         },
         {
           title: 'Date',
-          field: 'date'
+          field: 'date',
+          sortable: true
         },
         {
           title: 'Home score',
-          field: 'homeScore'
+          field: 'homeScore',
+          sortable: true
         },
         {
           title: 'Away score',
-          field: 'awayScore'
+          field: 'awayScore',
+          sortable: true
         },
         {
           title: 'Played',
-          field: 'played'
+          field: 'played',
+          sortable: true
         }
       ],
       data: [],
-      total: 0,
       query: {},
+      total: 0,
       season: {},
       timetable: [],
       showModal: false,
@@ -109,13 +109,13 @@
       }).catch(e => {
         throw e
       })
-      //  chujowe, ale nie dalo mi sie inaczej tego zrobic :( hax troche
       setTimeout(() => {
         $(' tr').click(function () {
-          var e          = $(this).find('td.id-tag').first()
-          var b          = $(e)
-          var id         = e[0].innerText
-          self.current   = id
+          var e        = $(this).find('td.id-tag').first()
+          var b        = $(e)
+          var id       = e[0].innerText
+          self.current = id
+          self.$router.push('/panel/matches/' + id)
           self.showModal = true
         })
       }, 500)
@@ -186,5 +186,16 @@
 </script>
 
 <style scoped>
+  .content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
+  .matches {
+    width: 100%;
+  }
 </style>

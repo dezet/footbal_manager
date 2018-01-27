@@ -7,12 +7,11 @@
       <div class="panel-main">
         <header>
           <div class="page-title-wrapper">
-            <h1 class="page-title">Zarządzanie sezonami</h1>
+            <h1 class="page-title">Zarządzanie meczami</h1>
           </div>
         </header>
-
         <div class="content" id="content">
-          <season-list></season-list>
+          <matches-list></matches-list>
         </div>
       </div>
 
@@ -22,13 +21,13 @@
 
 <script>
   import PanelMenu from '@/components/admin/PanelMenu'
-  import SeasonsList from '@/components/admin/season/SeasonsList'
+  import MatchesList from '@/components/admin/matches/MatchesList'
 
   export default {
-    name: 'season-page',
+    name: 'matches-page',
     components: {
       'panel-menu': PanelMenu,
-      'season-list': SeasonsList,
+      'matches-list': MatchesList,
     }
   }
 </script>

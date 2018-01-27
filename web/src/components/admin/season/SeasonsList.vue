@@ -39,7 +39,7 @@
   import auth from '../../../authentication'
 
   export default {
-    name: 'season-list',
+    name: 'seasons-list',
     // data used in template
     data: function () {
       return {
@@ -91,37 +91,7 @@
   }
 </script><!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1, h2 {
-    font-weight: normal;
-  }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
-
-  .seasons {
-    background: #F7F7F7;
-    min-width: 360px;
-    margin: auto;
-    min-height: 360px;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    flex: 1;
-    display: flex;
-    width: 100%;
-    height: 100%;
-  }
 
   .seasons_form_container__form {
     font: 95% Arial, Helvetica, sans-serif;
@@ -211,5 +181,36 @@
     width: 80%;
     padding-top: 10vh;
     min-height: 30vh;
+  }
+  h1, h2 {
+    font-weight: normal;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #42b983;
+  }
+
+  .seasons {
+    background: #F7F7F7;
+    min-width: 360px;
+    margin: auto;
+    min-height: 360px;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex: 1;
+    display: flex;
+    width: 100%;
+    height: 100%;
   }
 </style>

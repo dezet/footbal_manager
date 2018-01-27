@@ -38,11 +38,9 @@
 </template>
 
 <script>
-  import PanelMenu from '@/components/admin/PanelMenu'
-  import SeasonList from '@/components/admin/season/SeasonList'
 
   export default {
-    name: 'MatchScoreModal',
+    name: 'match-score-modal',
     components: {}
   }
 </script>

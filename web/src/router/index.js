@@ -10,7 +10,8 @@ import SeasonRapport from '@/components/admin/season/SeasonRapport'
 import SeasonPage from '@/components/admin/season/SeasonPage'
 import LeaguePage from '@/components/admin/leagues/LeaguePage'
 import TeamPage from '@/components/admin/teams/TeamPage'
-
+import MatchPage from '@/components/admin/matches/MatchPage'
+import MatchesPage from '@/components/admin/matches/MatchesPage'
 import auth from '../authentication'
 
 Vue.use(Router)
@@ -47,6 +48,18 @@ const router = new Router({
       path: '/panel/seasons/:id/rapport',
       name: 'SeasonRapport',
       component: SeasonRapport,
+      meta: {requiresAuth: false}
+    },
+    {
+      path: '/panel/matches/:id',
+      name: 'MatchPage',
+      component: MatchPage,
+      meta: {requiresAuth: false}
+    },
+    {
+      path: '/panel/matches',
+      name: 'MatchesPage',
+      component: MatchesPage,
       meta: {requiresAuth: false}
     },
     {

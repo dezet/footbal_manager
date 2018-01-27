@@ -18,7 +18,7 @@
           <a href="/panel/teams">Zespoły</a>
         </li>
         <li>
-          <a href="/panel">Mecze</a>
+          <a href="/panel/matches">Mecze</a>
         </li>
         <hr>
         <li>

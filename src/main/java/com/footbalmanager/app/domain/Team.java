@@ -19,7 +19,6 @@ public class Team {
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
-    @JsonIgnore
     @OneToMany(mappedBy = "team")
     private Collection<Player> players = new ArrayList<>();
     @OneToMany(mappedBy = "home")
