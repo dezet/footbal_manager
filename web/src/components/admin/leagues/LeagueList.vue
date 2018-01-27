@@ -1,5 +1,10 @@
 <template>
   <div class="leagues">
+    <button class="btn btn-success" v-on:click="showModal = true"><i class="fa fa-pencil" aria-hidden="true"></i>
+      Dodaj ligę
+    </button>
+    <modal v-if="showModal" :seasons="seasons" @closeModal="closeModal()" @addLeague="addLeague()"
+           v-on:show="showModal = true" />
     <div class="leagues_list">
       <table class="table table-hover">
         <thead>
@@ -22,34 +27,23 @@
         </tbody>
       </table>
     </div>
-    <div class="leagues_form_container">
-      <form id="form" v-on:submit.prevent="addLeague" class="leagues_form_container_form">
-        <div class="form-group">
-          <label for="leagueName">League name</label>
-          <input id="leagueName" class="form-control" type="text" v-model="newleague.name" placeholder="Name">
-        </div>
-
-        <div class="form-group">
-          <label for="season">Season</label>
-          <select id="season" class="form-control" v-model="newleague.season">
-            <option v-for="season in seasons" v-bind:value="season">{{ season.name }}</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-success">Save</button>
-      </form>
-    </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   import auth from '../../../authentication'
+  import LeagueModal from '@/components/admin/leagues/LeagueModal'
+
   export default {
     name: "league-list",
+    components: {
+      'modal': LeagueModal
+    },
     // data used in template
     data: function () {
       return {
+        showModal: false,
         leagues: [],
         seasons: [],
         newleague: {}
@@ -77,8 +71,16 @@
           throw e
         })
       },
+      closeModal: function () {
+        this.showModal = false
+      },
       addLeague: function () {
+        this.closeModal()
         let self = this
+        this.newleague = {
+          name: $('input#name').val(),
+          seasonId: $('select#season').val()
+        }
         axios.post(this.$config.API + 'leagues', this.newleague, auth.getAuthHeader()).then(response => {
           self.newleague = {}
           return axios.get(this.$config.API + 'leagues', auth.getAuthHeader())

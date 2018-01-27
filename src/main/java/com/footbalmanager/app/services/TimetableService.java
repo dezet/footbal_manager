@@ -1,15 +1,20 @@
 package com.footbalmanager.app.services;
 
-import com.footbalmanager.app.domain.Match;
-import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.domain.Team;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.util.*;
+import com.footbalmanager.app.domain.Match;
+import com.footbalmanager.app.domain.Season;
+import com.footbalmanager.app.domain.Team;
 
 @Service("timetableService")
 @Transactional
@@ -18,10 +23,7 @@ public class TimetableService {
     @Autowired
     private MatchService matchService;
 
-    @Autowired
-    private SeasonService seasonService;
-
-    @Autowired
+	@Autowired
     private TeamService teamService;
 
     private HashMap<Team, List<LocalDateTime>> teamSchedules = new HashMap<>();
@@ -57,7 +59,7 @@ public class TimetableService {
                         List<LocalDateTime> teamTimetable = teamSchedules.get(home);
                         teamTimetable.add(matchDate.get());
                     } else {
-                        throw new Exception("chujchuj");
+						throw new Exception("exception during scheduling matches");
                     }
                 }
             }

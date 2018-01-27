@@ -3,6 +3,7 @@ package com.footbalmanager.app.domain;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,10 +26,10 @@ public class League {
     @Column(name = "name", nullable = false)
     private String name;
     @JsonIgnore
-    @OneToMany(mappedBy = "league")
+	@OneToMany(mappedBy = "league", cascade = CascadeType.MERGE)
     private Collection<Team> teams = new ArrayList<>();
     @JsonIgnore
-    @OneToMany(mappedBy = "league")
+	@OneToMany(mappedBy = "league", cascade = CascadeType.MERGE)
     private Collection<Match> matches = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "season_id", nullable = false)

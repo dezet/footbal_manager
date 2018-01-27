@@ -1,5 +1,10 @@
 <template>
   <div class="teams">
+    <button class="btn btn-success" v-on:click="showModal = true"><i class="fa fa-pencil" aria-hidden="true"></i>
+      Dodaj zespół
+    </button>
+    <modal v-if="showModal" :leagues="leagues" @closeModal="closeModal()" @addTeam="addTeam()"
+           v-on:show="showModal = true" />
     <div class="teams_list">
       <table class="table table-hover">
         <thead>
@@ -21,34 +26,23 @@
         </tbody>
       </table>
     </div>
-    <div class="teams_form_container">
-      <form id="form" v-on:submit.prevent="addTeam" class="teams_form_container_form">
-        <div class="form-group">
-          <label for="teamName">Team name</label>
-          <input id="teamName" class="form-control" type="text" v-model="newteam.name" placeholder="Name">
-        </div>
-
-        <div class="form-group">
-          <label for="league">League</label>
-          <select id="league" class="form-control" v-model="newteam.league">
-            <option v-for="league in leagues" v-bind:value="league">{{ league.name }}</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-success">Save</button>
-      </form>
-    </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   import auth from '../../../authentication'
+  import TeamModal from '@/components/admin/teams/TeamModal'
+
   export default {
     name: "team-list",
+    components: {
+      'modal': TeamModal
+    },
     // data used in template
     data: function () {
       return {
+        showModal: false,
         teams: [],
         leagues: [],
         newteam: {}
@@ -74,8 +68,16 @@
           throw e
         })
       },
+      closeModal: function () {
+        this.showModal = false
+      },
       addTeam: function () {
+        this.closeModal()
         let self = this
+        this.newteam = {
+          name: $('input#name').val(),
+          leagueId: $('select#league').val()
+        }
         axios.post(this.$config.API + 'teams', this.newteam, auth.getAuthHeader()).then(response => {
           self.newteam = {}
           return axios.get(this.$config.API + 'teams', auth.getAuthHeader())

@@ -1,16 +1,19 @@
 package com.footbalmanager.app.services;
 
-import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.domain.Team;
-import com.footbalmanager.app.dto.team.PatchTeamRequestDto;
-import com.footbalmanager.app.dto.team.PostTeamRequestDto;
-import com.footbalmanager.app.repository.TeamRepository;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.List;
+import com.footbalmanager.app.domain.League;
+import com.footbalmanager.app.domain.Season;
+import com.footbalmanager.app.domain.Team;
+import com.footbalmanager.app.dto.team.PatchTeamRequestDto;
+import com.footbalmanager.app.dto.team.PostTeamRequestDto;
+import com.footbalmanager.app.repository.LeagueRepository;
+import com.footbalmanager.app.repository.TeamRepository;
 
 @Service("teamService")
 @Transactional
@@ -18,6 +21,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamRepository teamRepository;
+
+	@Autowired
+	private LeagueRepository leagueRepository;
 
     @Override
     public void update(Long leagueId, PatchTeamRequestDto dto) {
@@ -51,7 +57,8 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void save(PostTeamRequestDto dto) {
-        Team team = new Team(dto.getName(), dto.getLeague());
+		League league = leagueRepository.findOne(dto.getLeagueId());
+		Team team = new Team(dto.getName(), league);
         teamRepository.save(team);
     }
 
@@ -62,6 +69,6 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> findTeamsBySeason(Season season) {
-        return this.teamRepository.findAllBySeason(season.getId());
+		return teamRepository.findAllBySeason(season.getId());
     }
 }

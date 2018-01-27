@@ -1,25 +1,23 @@
 package com.footbalmanager.app.dto.team;
 
-import com.footbalmanager.app.domain.League;
-
 public class PostTeamRequestDto {
     private String name;
-    private League league;
+	private Long leagueId;
 
     public PostTeamRequestDto() {
 
     }
 
-    public PostTeamRequestDto(String name, League league) {
+	public PostTeamRequestDto(String name, Long leagueId) {
         this.name = name;
-        this.league = league;
+		this.leagueId = leagueId;
     }
 
     public String getName() {
         return name;
     }
 
-    public League getLeague() {
-        return league;
+	public Long getLeagueId() {
+		return leagueId;
     }
 }
