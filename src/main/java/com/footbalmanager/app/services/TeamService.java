@@ -14,4 +14,6 @@ public interface TeamService extends Service<Team> {
     void save(PostTeamRequestDto dto);
 
     List<Team> findTeamsBySeason(Season season);
+
+    Team assignPlayerToTeam(Long id, Long playerId);
 }
