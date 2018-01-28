@@ -34,69 +34,69 @@ const router = new Router({
       path: '/panel',
       name: 'Panel',
       component: Panel,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/seasons',
       name: 'SeasonsPage',
       component: SeasonsPage,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/seasons/:id',
       name: 'SeasonPage',
       component: SeasonPage,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/seasons/:id/rapport',
       name: 'SeasonRapport',
       component: SeasonRapport,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/matches/:id',
       name: 'MatchPage',
       component: MatchPage,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/matches',
       name: 'MatchesPage',
       component: MatchesPage,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/leagues',
       name: 'LeaguePage',
       component: LeaguePage,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/panel/teams',
       name: 'TeamPage',
       component: TeamPage,
-      meta: {requiresAuth: false, requiresAdmin: true}
+      meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
       path: '/leagues',
       component: Leagues,
-      meta: {requiresAuth: false, requiresAdmin: false}
+      meta: {requiresAuth: true, requiresAdmin: false}
     },
     {
       path: '/matches',
       component: Matches,
-      meta: {requiresAuth: false, requiresAdmin: false}
+      meta: {requiresAuth: true, requiresAdmin: false}
     },
     {
       path: '/seasons',
       component: Seasons,
-      meta: {requiresAuth: false, requiresAdmin: false}
+      meta: {requiresAuth: true, requiresAdmin: false}
     },
     {
       path: '/teams',
       component: Teams,
-      meta: {requiresAuth: false, requiresAdmin: false}
+      meta: {requiresAuth: true, requiresAdmin: false}
     },
     {
       path: '/login',

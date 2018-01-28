@@ -44,9 +44,7 @@ public class TestDataLoaderService {
 
 	@PostConstruct
 	public void init() {
-		Player admin = new Player("admin", "admin", "admin", "admin", "admin");
-		admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
-		playerRepository.save(admin);
+		addDefaultUsers();
 		List<Season> seasons = createTestSeasons();
 		List<League> leagues = createTestLeagues(seasons);
 		List<Team> teams = createTestTeams(leagues);
@@ -98,6 +96,15 @@ public class TestDataLoaderService {
 		Season season = new Season("sezon 2018", "2018");
 		season.setOpen(true);
 		return Collections.singletonList(seasonRepository.save(season));
+	}
+
+	private void addDefaultUsers() {
+		Player admin = new Player("admin", "admin", "admin", "admin", "admin");
+		admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+		playerRepository.save(admin);
+		Player user = new Player("user", "user", "user", "user", "user");
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		playerRepository.save(user);
 	}
 
 }
