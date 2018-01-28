@@ -9,4 +9,6 @@ public interface PlayerService extends Service<Player> {
     void update(Long playerId, PatchPlayerRequestDto dto);
 
     void save(PostPlayerRequestDto dto);
+
+    Player findByUsername(String username);
 }

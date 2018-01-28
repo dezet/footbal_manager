@@ -10,7 +10,8 @@
     </button>
     <modal v-if="showModal" :leagues="leagues" @closeModal="closeModal()" @addTeam="addTeam()"
            v-on:show="showModal = true"/>
-    <assignToTeamModal v-if="showAssignTeamModal" :teams="teams" @closeModal="showAssignTeamModal = false" @assignTeam="assignTeam()"
+    <assignToTeamModal v-if="showAssignTeamModal" :teams="teams" @closeModal="showAssignTeamModal = false"
+                       @assignTeam="assignTeam()"
                        v-on:show="showModal = true"/>
     <div class="teams_list">
       <table class="table table-hover">
@@ -100,17 +101,15 @@
       },
       assignTeam: function () {
         this.showAssignTeamModal = false
-        console.log();
-        axios.get(this.$config.API + 'teams/' + $('#team').val() + '/assign', auth.getAuthHeader()).
-              then(response => {
-                return axios.get(this.$config.API + 'teams', auth.getAuthHeader())
-              }).
-              then(response => {
-                self.teams = response.data
-              }).
-              catch(e => {
-                throw e
-              })
+        console.log()
+        axios.get(this.$config.API + 'teams/' + $('#team').val() + '/assign/' + auth.getUsername(),
+          auth.getAuthHeader()).then(response => {
+          return axios.get(this.$config.API + 'teams', auth.getAuthHeader())
+        }).then(response => {
+          self.teams = response.data
+        }).catch(e => {
+          throw e
+        })
       },
       isAdmin: function () {
         return auth.isAdmin()

@@ -73,4 +73,9 @@ public class PlayerServiceImpl implements PlayerService, UserDetailsService {
     public Iterable<Player> save(Iterable<Player> entities) {
         return playerRepository.save(entities);
     }
+
+    @Override
+    public Player findByUsername(String username) {
+        return playerRepository.findByUsername(username);
+    }
 }

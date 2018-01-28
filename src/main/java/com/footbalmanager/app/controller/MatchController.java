@@ -28,21 +28,18 @@ public class MatchController extends BaseController {
 
     @PostMapping("/matches")
     public ResponseEntity<?> saveMatch(@RequestBody PostMatchRequestDto dto) {
-        //TODO: obsluga wyjątków
         matchService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/matches/{id}")
     public ResponseEntity<?> updateMatch(@PathVariable Long id, @RequestBody PatchMatchRequestDto dto) {
-        //TODO: obsluga wyjątków
         matchService.update(id, dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/matches/{id}")
     public ResponseEntity<?> deleteMatch(@PathVariable Long id) {
-        //TODO: obsluga wyjątków
         matchService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
