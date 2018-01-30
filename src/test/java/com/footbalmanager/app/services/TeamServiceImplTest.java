@@ -1,7 +1,10 @@
 package com.footbalmanager.app.services;
 
-import java.util.Arrays;
-
+import com.footbalmanager.app.domain.League;
+import com.footbalmanager.app.domain.Season;
+import com.footbalmanager.app.domain.Team;
+import com.footbalmanager.app.repository.LeagueRepository;
+import com.footbalmanager.app.repository.TeamRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,29 +15,20 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.footbalmanager.app.domain.League;
-import com.footbalmanager.app.domain.Season;
-import com.footbalmanager.app.domain.Team;
-import com.footbalmanager.app.repository.TeamRepository;
+import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
 public class TeamServiceImplTest {
 
-	@TestConfiguration
-	static class BaseServiceImplTestContextConfiguration {
-
-		@Bean
-		public TeamService teamService() {
-			return new TeamServiceImpl();
-		}
-	}
-
     @MockBean
     private TeamRepository teamRepository;
+    @MockBean
+    private LeagueRepository leagueRepository;
+    @MockBean
+    private PlayerService playerService;
 
     @Autowired
     private TeamService teamService;
-
     private Team team;
 
     @Before
@@ -115,6 +109,15 @@ public class TeamServiceImplTest {
                 .then(teamRepository)
                 .should(BDDMockito.times(1))
                 .delete(team);
+    }
+
+    @TestConfiguration
+    static class BaseServiceImplTestContextConfiguration {
+
+        @Bean
+        public TeamService teamService() {
+            return new TeamServiceImpl();
+        }
     }
 
 }
