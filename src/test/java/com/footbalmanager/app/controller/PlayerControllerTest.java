@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -35,6 +36,9 @@ public class PlayerControllerTest {
 
     @MockBean
     private PlayerRepository playerRepositoryMock;
+
+    @MockBean
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private MockMvc mockMvc;
@@ -71,20 +75,5 @@ public class PlayerControllerTest {
         mockMvc.perform(get("/players/" + playerId)).andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(player)));
     }
-
-
-    public void postPlayer_thenResponseIsOk() throws Exception {
-        PostPlayerRequestDto pprd = new PostPlayerRequestDto();
-
-    }
-
-    public void patchPlayer_thenResponseIsOk() throws Exception {
-
-    }
-
-    public void deletePlayer_thenResponseIsOk() throws Exception {
-
-    }
-
 
 }

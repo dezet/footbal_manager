@@ -72,18 +72,4 @@ public class LeagueControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(l)));
     }
-
-    public void postLeague_thenResponseIsOk() throws Exception {
-
-    }
-
-    public void patchLeague_thenResponseIsOk() throws Exception {
-
-    }
-
-    public void deleteLeague_thenResponseIsOk() throws Exception {
-
-    }
-
-
 }
