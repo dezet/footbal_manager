@@ -1,6 +1,5 @@
 package com.footbalmanager.app.domain;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -16,12 +15,16 @@ public class Season {
     @Column(name = "year", nullable = false)
     private String year;
 
-    private Season() {
+    @Column(name = "open", nullable = false)
+    private boolean open;
+
+    public Season() {
     }
 
     public Season(String name, String year) {
         this.name = name;
         this.year = year;
+        open = true;
     }
 
     public Long getId() {
@@ -48,5 +51,11 @@ public class Season {
         this.year = year;
     }
 
+    public boolean isOpen() {
+        return open;
+    }
 
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
 }

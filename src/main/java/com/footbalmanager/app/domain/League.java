@@ -1,8 +1,19 @@
 package com.footbalmanager.app.domain;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -14,12 +25,14 @@ public class League {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @OneToMany(mappedBy = "league")
+    @JsonIgnore
+	@OneToMany(mappedBy = "league", cascade = CascadeType.MERGE)
     private Collection<Team> teams = new ArrayList<>();
-    @OneToMany(mappedBy = "league")
+    @JsonIgnore
+	@OneToMany(mappedBy = "league", cascade = CascadeType.MERGE)
     private Collection<Match> matches = new ArrayList<>();
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "away_team_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "season_id", nullable = false)
     private Season season;
 
     League() {
